@@ -3,10 +3,12 @@
     <v-container>
       <v-card>
         <v-card-title>
-          <h1>Selected Date Range : {{ range.join('&mdash;')}}</h1>
+          <h1>Selected Date Range : {{ range.join('&mdash;') }}</h1>
         </v-card-title>
         <v-card-text>
-          <DateRange @input="onDateRangeChange" :options="dateRangeOptions"></DateRange>
+          <DateRange
+            @input="onDateRangeChange"
+            :options="dateRangeOptions"/>
         </v-card-text>
       </v-card>
     </v-container>
@@ -17,6 +19,7 @@
 import { format, subDays } from 'date-fns';
 import '../dist/vuetify-daterange-picker.css';
 import DateRange from '../';
+
 export default {
   components: {
     DateRange,
@@ -35,11 +38,17 @@ export default {
           },
           {
             label: 'Yesterday',
-            range: [format(subDays(new Date(), 1), 'YYYY-MM-DD'), format(subDays(new Date(), 1), 'YYYY-MM-DD')],
+            range: [
+              format(subDays(new Date(), 1), 'YYYY-MM-DD'),
+              format(subDays(new Date(), 1), 'YYYY-MM-DD'),
+            ],
           },
           {
             label: 'Last 30 Days',
-            range: [format(subDays(new Date(), 30), 'YYYY-MM-DD'), format(subDays(new Date(), 1), 'YYYY-MM-DD')],
+            range: [
+              format(subDays(new Date(), 30), 'YYYY-MM-DD'),
+              format(subDays(new Date(), 1), 'YYYY-MM-DD'),
+            ],
           },
         ],
       },

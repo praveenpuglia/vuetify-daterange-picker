@@ -44,7 +44,7 @@
           v-model="endDate"/>
       </div>
     </div>
-  </div>      
+  </div>   
 </template>
 
 <script>
@@ -73,7 +73,9 @@ export default {
       return format(new Date(this.endDate), this.format);
     },
     isPresetActive() {
-      return this.presets.map(preset => preset.range[0] === this.startDate && preset.range[1] === this.endDate);
+      return this.presets.map(
+        preset => preset.range[0] === this.startDate && preset.range[1] === this.endDate
+      );
     },
     allowedStartDates() {
       return {

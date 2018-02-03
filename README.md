@@ -1,12 +1,10 @@
 # Vuetify Date Range Picker
 
-> The missing date range picker for Vuetify JS you have been looking for.
-> ![Date Range Picker](https://raw.githubusercontent.com/praveenpuglia/vuetify-daterange-picker/1eb3ba1d/public/updated-date-range-lres.gif)
+> The missing date range picker for Vuetify JS you have been looking for. ![Date Range Picker](https://raw.githubusercontent.com/praveenpuglia/vuetify-daterange-picker/1eb3ba1d/public/updated-date-range-lres.gif)
 
 ## Heads Up
 
-This is absolutely fresh and new for me. Help make this component better by
-creating issues and if you like it, ⭐️ it. 🙌
+This is absolutely fresh and new for me. Help make this component better by creating issues and if you like it, ⭐️ it. 🙌
 
 # Requirements
 
@@ -55,14 +53,11 @@ export default {
 
 Options is an object that helps set up the component.
 
-* `startDate`: **String**. In `YYYY-MM-DD` format. Prefill value for start date
-  picker.
+* `startDate`: **String**. In `YYYY-MM-DD` format. Prefill value for start date picker.
 * `endDate`: **String**. In `YYYY-MM-DD` format. Prefill value for end date picker.
 * `minDate`: **String**. The earliest date a user can select in `YYYY-MM-DD` format.
-* `format`: **String**. The format in which you want the user to see the dates in
-  the inputs. E.g. `MM/DD/YYYY`.
-* `presets`: **Array**. An array of preset values like `Today`, `Yesterday` etc.
-  It's an array of object that looks like this.
+* `format`: **String**. The format in which you want the user to see the dates in the inputs. E.g. `MM/DD/YYYY`.
+* `presets`: **Array**. An array of preset values like `Today`, `Yesterday` etc. It's an array of object that looks like this.
 
 ```js
 presets: [
@@ -78,8 +73,7 @@ presets: [
 
 ## Events
 
-* `input`: **Array**. An array with start date and end date, triggered after every date
-  selection.
+* `input`: **Array**. An array with start date and end date, triggered after every date selection.
 
 ## Thanks
 
