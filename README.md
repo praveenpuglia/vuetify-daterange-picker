@@ -39,18 +39,20 @@ yarn add vuetify-daterange-picker
 
 ## Usage
 
-```js
-import DateRange from 'vuetify-daterange-picker';
-
-export default {
-  components: { DateRange },
-};
-```
-
-```html
+```vue
 <template>
     <DateRange :options="dateRangeOptions" @input="onDateRangeChange"></DateRange>
 </template>
+
+<script>
+import DateRange from 'vuetify-daterange-picker';
+import 'vuetify-daterange-picker/dist/vuetify-daterange-picker.css';
+
+export default {
+  components: { DateRange },
+  ...
+};
+</script>
 ```
 
 ## Props
