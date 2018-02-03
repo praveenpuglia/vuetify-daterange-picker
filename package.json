@@ -1,7 +1,7 @@
 {
   "name": "vuetify-daterange-picker",
   "description": "The missing date range picker for Vuetify JS you have been looking for",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "dist/vuetify-daterange-picker.cjs.js",
   "module": "dist/vuetify-daterange-picker.es.js",
   "browser": "dist/vuetify-daterange-picker.js",
@@ -9,7 +9,12 @@
   "unpkg": "dist/vuetify-daterange-picker.min.js",
   "author": "Praveen Puglia <praveenpuglia@gmail.com>",
   "repository": "https://github.com/praveenpuglia/vuetify-daterange-picker",
-  "files": ["dist", "src", "LICENSE", "README.md"],
+  "files": [
+    "dist",
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "dev": "poi demo/index.js",
     "build:demo": "npm run build && poi build demo/index.js",
