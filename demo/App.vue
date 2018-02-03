@@ -14,8 +14,9 @@
 </template>
 
 <script>
-import * as moment from 'moment';
-import DateRange from './DateRange';
+import moment from "moment";
+import "../dist/vuetify-daterange-picker.css";
+import DateRange from "../";
 export default {
   components: {
     DateRange
@@ -25,38 +26,38 @@ export default {
       range: [],
       dateRangeOptions: {
         startDate: moment()
-          .subtract(7, 'days')
-          .format('YYYY-MM-DD'),
-        endDate: moment().format('YYYY-MM-DD'),
-        format: 'MM/DD/YYYY',
+          .subtract(7, "days")
+          .format("YYYY-MM-DD"),
+        endDate: moment().format("YYYY-MM-DD"),
+        format: "MM/DD/YYYY",
         presets: [
           {
-            label: 'Today',
+            label: "Today",
             range: [
-              moment().format('YYYY-MM-DD'),
-              moment().format('YYYY-MM-DD')
+              moment().format("YYYY-MM-DD"),
+              moment().format("YYYY-MM-DD")
             ]
           },
           {
-            label: 'Yesterday',
+            label: "Yesterday",
             range: [
               moment()
-                .subtract(1, 'days')
-                .format('YYYY-MM-DD'),
+                .subtract(1, "days")
+                .format("YYYY-MM-DD"),
               moment()
-                .subtract(1, 'days')
-                .format('YYYY-MM-DD')
+                .subtract(1, "days")
+                .format("YYYY-MM-DD")
             ]
           },
           {
-            label: 'Last 30 Days',
+            label: "Last 30 Days",
             range: [
               moment()
-                .subtract(30, 'days')
-                .format('YYYY-MM-DD'),
+                .subtract(30, "days")
+                .format("YYYY-MM-DD"),
               moment()
-                .subtract(1, 'days')
-                .format('YYYY-MM-DD')
+                .subtract(1, "days")
+                .format("YYYY-MM-DD")
             ]
           }
         ]

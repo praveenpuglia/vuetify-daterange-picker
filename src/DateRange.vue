@@ -3,7 +3,12 @@
     <div class="date-range__presets">
       <v-list>
         <v-subheader>Presets</v-subheader>
-        <v-list-tile v-model="isPresetActive[index]" ripple v-for="(preset, index) in presets" :key="index" @click="onPresetSelect(index)">
+        <v-list-tile
+          v-model="isPresetActive[index]"
+          ripple
+          v-for="(preset, index) in presets"
+          :key="index"
+          @click="onPresetSelect(index)">
           <v-list-tile-content>
             {{ preset.label }}
           </v-list-tile-content>
@@ -12,21 +17,46 @@
     </div>
     <div class="date-range__pickers">
       <div class="date-range__picker date-range__pickers--start">
-        <v-text-field name="startDate" :label="`Start Date(${format})`" class="date-range__pickers-input" prepend-icon="event" v-model="formattedStartDate"
-          readonly></v-text-field>
-        <v-date-picker @change="onDateRangeChange" :allowed-dates="allowedStartDates" no-title v-model="startDate"></v-date-picker>
+        <v-text-field
+          name="startDate"
+          :label="`Start Date(${format})`"
+          class="date-range__pickers-input"
+          prepend-icon="event"
+          v-model="formattedStartDate"
+          readonly/>
+        <v-date-picker
+          @change="onDateRangeChange"
+          :allowed-dates="allowedStartDates"
+          no-title
+          v-model="startDate"/>
       </div>
       <div class="date-range__picker date-range__picker--end">
-        <v-text-field name="endDate" :label="`End Date(${format})`" v-model="formattedEndDate" class="date-range__pickers-input"
-          readonly></v-text-field>
-        <v-date-picker @change="onDateRangeChange" :allowed-dates="allowedEndDates" no-title v-model="endDate"></v-date-picker>
+        <v-text-field
+          name="endDate"
+          :label="`End Date(${format})`"
+          v-model="formattedEndDate"
+          class="date-range__pickers-input"
+          readonly/>
+        <v-date-picker
+          @change="onDateRangeChange"
+          :allowed-dates="allowedEndDates"
+          no-title
+          v-model="endDate"/>
       </div>
     </div>
-  </div>
+  </div>      
 </template>
+
 <script>
-import * as moment from 'moment';
+import moment from "moment";
+
 export default {
+  props: {
+    options: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       startDate: this.options.startDate,
@@ -34,24 +64,6 @@ export default {
       format: this.options.format,
       presets: this.options.presets
     };
-  },
-  props: ['options'],
-  watch: {
-    startDate() {
-      this.onDateRangeChange();
-    },
-    endDate() {
-      this.onDateRangeChange();
-    }
-  },
-  methods: {
-    onPresetSelect(presetIndex) {
-      this.startDate = this.presets[presetIndex].range[0];
-      this.endDate = this.presets[presetIndex].range[1];
-    },
-    onDateRangeChange() {
-      this.$emit('input', [this.startDate, this.endDate]);
-    }
   },
   computed: {
     formattedStartDate() {
@@ -75,12 +87,30 @@ export default {
     allowedEndDates() {
       return {
         min: this.startDate,
-        max: moment().format('YYYY-MM-DD')
+        max: moment().format("YYYY-MM-DD")
       };
+    }
+  },
+  watch: {
+    startDate() {
+      this.onDateRangeChange();
+    },
+    endDate() {
+      this.onDateRangeChange();
+    }
+  },
+  methods: {
+    onPresetSelect(presetIndex) {
+      this.startDate = this.presets[presetIndex].range[0];
+      this.endDate = this.presets[presetIndex].range[1];
+    },
+    onDateRangeChange() {
+      this.$emit("input", [this.startDate, this.endDate]);
     }
   }
 };
 </script>
+
 <style scoped>
 .date-range {
   display: flex;
