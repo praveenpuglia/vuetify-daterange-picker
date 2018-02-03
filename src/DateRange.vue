@@ -48,48 +48,45 @@
 </template>
 
 <script>
-import moment from "moment";
+import { format } from 'date-fns';
 
 export default {
   props: {
     options: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       startDate: this.options.startDate,
       endDate: this.options.endDate,
       format: this.options.format,
-      presets: this.options.presets
+      presets: this.options.presets,
     };
   },
   computed: {
     formattedStartDate() {
-      return moment(this.startDate).format(this.format);
+      return format(new Date(this.startDate), this.format);
     },
     formattedEndDate() {
-      return moment(this.endDate).format(this.format);
+      return format(new Date(this.endDate), this.format);
     },
     isPresetActive() {
-      return this.presets.map(
-        preset =>
-          preset.range[0] === this.startDate && preset.range[1] === this.endDate
-      );
+      return this.presets.map(preset => preset.range[0] === this.startDate && preset.range[1] === this.endDate);
     },
     allowedStartDates() {
       return {
         min: this.options.minDate,
-        max: this.endDate
+        max: this.endDate,
       };
     },
     allowedEndDates() {
       return {
         min: this.startDate,
-        max: moment().format("YYYY-MM-DD")
+        max: format(new Date(), 'YYYY-MM-DD'),
       };
-    }
+    },
   },
   watch: {
     startDate() {
@@ -97,7 +94,7 @@ export default {
     },
     endDate() {
       this.onDateRangeChange();
-    }
+    },
   },
   methods: {
     onPresetSelect(presetIndex) {
@@ -105,9 +102,9 @@ export default {
       this.endDate = this.presets[presetIndex].range[1];
     },
     onDateRangeChange() {
-      this.$emit("input", [this.startDate, this.endDate]);
-    }
-  }
+      this.$emit('input', [this.startDate, this.endDate]);
+    },
+  },
 };
 </script>
 

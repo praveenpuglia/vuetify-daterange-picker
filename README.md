@@ -14,13 +14,7 @@ You must have...
 
 * Vue.JS
 * VuetifyJS
-* Moment.JS
-
-## Need Help
-
-Currently this component is published to NPM as a direct `.vue` file, which is
-probably not a good idea. Can someone help me distribute this properly? I have
-no idea around that.
+* date-fns
 
 ## Features
 

@@ -7,9 +7,9 @@ module.exports = {
   vue: {
     css: 'dist/vuetify-daterange-picker.css',
   },
-  external: ['vue', 'vuetify', 'moment'],
+  external: ['vue', 'vuetify', 'date-fns'],
   globals: {
-    moment: 'moment',
-    vue: 'Vue',
+    Vue: 'vue',
+    'date-fns': 'dateFns',
   },
 };
