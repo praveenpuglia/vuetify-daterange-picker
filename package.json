@@ -1,35 +1,44 @@
 {
   "name": "vuetify-daterange-picker",
-  "description":
-    "The missing date range picker for Vuetify JS you have been looking for",
+  "description": "The missing date range picker for Vuetify JS you have been looking for",
   "version": "1.0.1",
-  "main": "src/DateRange.vue",
+  "main": "dist/vuetify-daterange-picker.cjs.js",
+  "module": "dist/vuetify-daterange-picker.es.js",
+  "browser": "dist/vuetify-daterange-picker.js",
+  "cdn": "dist/vuetify-daterange-picker.min.js",
+  "unpkg": "dist/vuetify-daterange-picker.min.js",
   "author": "Praveen Puglia <praveenpuglia@gmail.com>",
   "repository": "https://github.com/praveenpuglia/vuetify-daterange-picker",
+  "files": ["dist", "src", "LICENSE", "README.md"],
   "scripts": {
-    "dev":
-      "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "dev": "poi demo/index.js",
+    "build:demo": "npm run build && poi build demo/index.js",
+    "deploy": "npm run build:demo && ghpages praveenpuglia/vuetify-daterange-picker -p build",
+    "test": "npm run lint",
+    "build": "bili src/DateRange.vue",
+    "lint": "eslint --ext js --ext vue src",
+    "lint:fix": "npm run lint -- --fix",
+    "prepublish": "npm run build"
+  },
+  "peerDependencies": {
+    "moment": ">=2.20.1",
+    "vue": ">=2.5.3",
+    "vuetify": ">=0.17.4"
+  },
+  "devDependencies": {
+    "bili": "^2.2.6",
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-vue": "^4.2.2",
+    "ghpages": "^0.0.10",
+    "poi": "^9.6.13",
+    "rollup-plugin-vue": "^3.0.0",
+    "vue": "^2.5.13",
+    "vue-template-compiler": "^2.5.13"
   },
   "dependencies": {
     "moment": "^2.20.1",
-    "vue": "^2.5.3",
-    "vuetify": "^0.17.4"
-  },
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-stage-2": "^6.24.1",
-    "cross-env": "^5.0.5",
-    "css-loader": "^0.28.7",
-    "file-loader": "^1.1.4",
-    "style-loader": "^0.13.1",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1",
-    "vue-loader": "^13.0.5",
-    "vue-template-compiler": "^2.5.3",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
+    "vuetify": "^0.17.7"
   }
 }
