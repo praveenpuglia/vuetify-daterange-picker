@@ -1,7 +1,8 @@
 # Vuetify Date Range Picker
 
 > The missing date range picker for Vuetify JS you have been looking for.
-![Date Range Picker](./public/updated-date-range-lres.gif)
+> ![Date Range Picker](https://github.com/praveenpuglia/vuetify-daterange-picker/blob/master/public/updated-date-range-lres.gif)
+
 ## Heads Up
 
 This is absolutely fresh and new for me. Help make this component better by
@@ -42,7 +43,7 @@ yarn add vuetify-daterange-picker
 import DateRange from 'vuetify-daterange-picker';
 
 export default {
-  components: { DateRange }
+  components: { DateRange },
 };
 ```
 
@@ -73,9 +74,9 @@ presets: [
     label: 'Today',
     range: [
       '2018-01-01', //start date. YYYY-MM-DD
-      '2018-02-01' // end date. YYYY-MM-DD
-    ]
-  }
+      '2018-02-01', // end date. YYYY-MM-DD
+    ],
+  },
 ];
 ```
 
@@ -89,3 +90,5 @@ presets: [
 * [VuetifyJS](https://vuetifyjs.com/)
 * [Vue.JS](https://vuejs.org)
 * [Moment.js](https://momentjs.com/)
+* [poi](https://poi.js.org/#/)
+* [bili](https://egoist.moe/bili/)

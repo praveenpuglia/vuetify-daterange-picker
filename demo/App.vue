@@ -14,11 +14,12 @@
 </template>
 
 <script>
-import * as moment from 'moment';
-import DateRange from './DateRange';
+import moment from 'moment';
+import '../dist/vuetify-daterange-picker.css';
+import DateRange from '../';
 export default {
   components: {
-    DateRange
+    DateRange,
   },
   data() {
     return {
@@ -32,10 +33,7 @@ export default {
         presets: [
           {
             label: 'Today',
-            range: [
-              moment().format('YYYY-MM-DD'),
-              moment().format('YYYY-MM-DD')
-            ]
+            range: [moment().format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')],
           },
           {
             label: 'Yesterday',
@@ -45,8 +43,8 @@ export default {
                 .format('YYYY-MM-DD'),
               moment()
                 .subtract(1, 'days')
-                .format('YYYY-MM-DD')
-            ]
+                .format('YYYY-MM-DD'),
+            ],
           },
           {
             label: 'Last 30 Days',
@@ -56,17 +54,17 @@ export default {
                 .format('YYYY-MM-DD'),
               moment()
                 .subtract(1, 'days')
-                .format('YYYY-MM-DD')
-            ]
-          }
-        ]
-      }
+                .format('YYYY-MM-DD'),
+            ],
+          },
+        ],
+      },
     };
   },
   methods: {
     onDateRangeChange(range) {
       this.range = range;
-    }
-  }
+    },
+  },
 };
 </script>
