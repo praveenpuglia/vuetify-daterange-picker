@@ -1,7 +1,7 @@
 # Vuetify Date Range Picker
 
 > The missing date range picker for Vuetify JS you have been looking for.
-> ![Date Range Picker](https://github.com/praveenpuglia/vuetify-daterange-picker/blob/master/public/updated-date-range-lres.gif)
+> ![Date Range Picker](https://raw.githubusercontent.com/praveenpuglia/vuetify-daterange-picker/1eb3ba1d/public/updated-date-range-lres.gif)
 
 ## Heads Up
 
@@ -12,9 +12,9 @@ creating issues and if you like it, ⭐️ it. 🙌
 
 You must have...
 
-* Vue.JS
-* VuetifyJS
-* date-fns
+* [VuetifyJS](https://vuetifyjs.com/)
+* [Vue.JS](https://vuejs.org)
+* [date-fns](https://date-fns.org)
 
 ## Features
 
@@ -85,6 +85,6 @@ presets: [
 
 * [VuetifyJS](https://vuetifyjs.com/)
 * [Vue.JS](https://vuejs.org)
-* [Moment.js](https://momentjs.com/)
+* [date-fns](https://date-fns.org)
 * [poi](https://poi.js.org/#/)
 * [bili](https://egoist.moe/bili/)
