@@ -14,8 +14,7 @@
 </template>
 
 <script>
-import subDays from 'date-fns/sub_days';
-import format from 'date-fns/format';
+import { format, subDays } from 'date-fns';
 import '../dist/vuetify-daterange-picker.css';
 import DateRange from '../';
 export default {
