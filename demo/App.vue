@@ -3,10 +3,12 @@
     <v-container>
       <v-card>
         <v-card-title>
-          <h1>Selected Date Range : {{ range.join('&mdash;')}}</h1>
+          <h1>Selected Date Range : {{ range.join('&mdash;') }}</h1>
         </v-card-title>
         <v-card-text>
-          <DateRange @input="onDateRangeChange" :options="dateRangeOptions"></DateRange>
+          <DateRange
+            @input="onDateRangeChange"
+            :options="dateRangeOptions"/>
         </v-card-text>
       </v-card>
     </v-container>
@@ -14,60 +16,51 @@
 </template>
 
 <script>
-import moment from "moment";
-import "../dist/vuetify-daterange-picker.css";
-import DateRange from "../";
+import { format, subDays } from 'date-fns';
+import '../dist/vuetify-daterange-picker.css';
+import DateRange from '../';
+
 export default {
   components: {
-    DateRange
+    DateRange,
   },
   data() {
     return {
       range: [],
       dateRangeOptions: {
-        startDate: moment()
-          .subtract(7, "days")
-          .format("YYYY-MM-DD"),
-        endDate: moment().format("YYYY-MM-DD"),
-        format: "MM/DD/YYYY",
+        startDate: format(subDays(new Date(), 7), 'YYYY-MM-DD'),
+        endDate: format(new Date(), 'YYYY-MM-DD'),
+        format: 'MM/DD/YYYY',
         presets: [
           {
-            label: "Today",
+            label: 'Today',
             range: [
-              moment().format("YYYY-MM-DD"),
-              moment().format("YYYY-MM-DD")
-            ]
+              format(new Date(), 'YYYY-MM-DD'),
+              format(new Date(), 'YYYY-MM-DD'),
+            ],
           },
           {
-            label: "Yesterday",
+            label: 'Yesterday',
             range: [
-              moment()
-                .subtract(1, "days")
-                .format("YYYY-MM-DD"),
-              moment()
-                .subtract(1, "days")
-                .format("YYYY-MM-DD")
-            ]
+              format(subDays(new Date(), 1), 'YYYY-MM-DD'),
+              format(subDays(new Date(), 1), 'YYYY-MM-DD'),
+            ],
           },
           {
-            label: "Last 30 Days",
+            label: 'Last 30 Days',
             range: [
-              moment()
-                .subtract(30, "days")
-                .format("YYYY-MM-DD"),
-              moment()
-                .subtract(1, "days")
-                .format("YYYY-MM-DD")
-            ]
-          }
-        ]
-      }
+              format(subDays(new Date(), 30), 'YYYY-MM-DD'),
+              format(subDays(new Date(), 1), 'YYYY-MM-DD'),
+            ],
+          },
+        ],
+      },
     };
   },
   methods: {
     onDateRangeChange(range) {
       this.range = range;
-    }
-  }
+    },
+  },
 };
 </script>

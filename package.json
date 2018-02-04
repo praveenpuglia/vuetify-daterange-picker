@@ -1,6 +1,7 @@
 {
   "name": "vuetify-daterange-picker",
-  "description": "The missing date range picker for Vuetify JS you have been looking for",
+  "description":
+    "The missing date range picker for Vuetify JS you have been looking for",
   "version": "1.0.1",
   "main": "dist/vuetify-daterange-picker.cjs.js",
   "module": "dist/vuetify-daterange-picker.es.js",
@@ -13,15 +14,25 @@
   "scripts": {
     "dev": "poi demo/index.js",
     "build:demo": "npm run build && poi build demo/index.js",
-    "deploy": "npm run build:demo && ghpages praveenpuglia/vuetify-daterange-picker -p build",
+    "deploy":
+      "npm run build:demo && ghpages praveenpuglia/vuetify-daterange-picker -p build",
     "test": "npm run lint",
     "build": "bili src/DateRange.vue",
-    "lint": "eslint --ext js --ext vue src",
+    "lint": "eslint --ext js --ext vue src demo",
     "lint:fix": "npm run lint -- --fix",
-    "prepublish": "npm run build"
+    "format":
+      "prettier {src,demo}/**/*.vue {src,demo}/**/*.js **/*.md **/*.json --write",
+    "prepublish": "npm run build",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": ["prettier --write", "eslint", "git add"],
+    "*.vue": ["prettier --write", "eslint", "git add"],
+    "*.md": ["prettier --write", "git add"],
+    "*.json": ["prettier --write", "git add"]
   },
   "peerDependencies": {
-    "moment": ">=2.20.1",
+    "date-fns": ">=1.29.0",
     "vue": ">=2.5.3",
     "vuetify": ">=0.17.4"
   },
@@ -29,16 +40,20 @@
     "bili": "^2.2.6",
     "eslint": "^4.17.0",
     "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-vue": "^4.2.2",
     "ghpages": "^0.0.10",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.1.0",
     "poi": "^9.6.13",
+    "prettier": "^1.10.2",
     "rollup-plugin-vue": "^3.0.0",
     "vue": "^2.5.13",
     "vue-template-compiler": "^2.5.13"
   },
   "dependencies": {
-    "moment": "^2.20.1",
+    "date-fns": "^1.29.0",
     "vuetify": "^0.17.7"
   }
 }

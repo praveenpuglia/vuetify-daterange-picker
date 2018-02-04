@@ -3,7 +3,7 @@ module.exports = {
   parserOptions: {
     sourceType: 'module',
   },
-  extends: ['airbnb-base', 'plugin:vue/recommended'],
+  extends: ['airbnb-base', 'prettier', 'plugin:vue/recommended'],
   rules: {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'max-len': 0,
