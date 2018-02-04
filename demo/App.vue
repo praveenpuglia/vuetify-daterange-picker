@@ -34,7 +34,10 @@ export default {
         presets: [
           {
             label: 'Today',
-            range: [format(new Date(), 'YYYY-MM-DD'), format(new Date(), 'YYYY-MM-DD')],
+            range: [
+              format(new Date(), 'YYYY-MM-DD'),
+              format(new Date(), 'YYYY-MM-DD'),
+            ],
           },
           {
             label: 'Yesterday',

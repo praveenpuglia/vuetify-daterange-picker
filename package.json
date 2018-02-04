@@ -1,6 +1,7 @@
 {
   "name": "vuetify-daterange-picker",
-  "description": "The missing date range picker for Vuetify JS you have been looking for",
+  "description":
+    "The missing date range picker for Vuetify JS you have been looking for",
   "version": "1.0.1",
   "main": "dist/vuetify-daterange-picker.cjs.js",
   "module": "dist/vuetify-daterange-picker.es.js",
@@ -13,12 +14,14 @@
   "scripts": {
     "dev": "poi demo/index.js",
     "build:demo": "npm run build && poi build demo/index.js",
-    "deploy": "npm run build:demo && ghpages praveenpuglia/vuetify-daterange-picker -p build",
+    "deploy":
+      "npm run build:demo && ghpages praveenpuglia/vuetify-daterange-picker -p build",
     "test": "npm run lint",
     "build": "bili src/DateRange.vue",
     "lint": "eslint --ext js --ext vue src demo",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier {src,demo}/**/*.vue {src,demo}/**/*.js **/*.md **/*.json --write",
+    "format":
+      "prettier {src,demo}/**/*.vue {src,demo}/**/*.js **/*.md **/*.json --write",
     "prepublish": "npm run build",
     "precommit": "lint-staged"
   },

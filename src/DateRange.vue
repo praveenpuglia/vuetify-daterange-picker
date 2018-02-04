@@ -74,7 +74,8 @@ export default {
     },
     isPresetActive() {
       return this.presets.map(
-        preset => preset.range[0] === this.startDate && preset.range[1] === this.endDate
+        preset =>
+          preset.range[0] === this.startDate && preset.range[1] === this.endDate
       );
     },
     allowedStartDates() {
