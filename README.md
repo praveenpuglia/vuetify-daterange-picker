@@ -49,7 +49,7 @@ export default {
 
 ## Props
 
-#### `options` :
+#### `options` : Object
 
 Options is an object that helps set up the component.
 
@@ -70,6 +70,10 @@ presets: [
   },
 ];
 ```
+
+#### `no-presets` : Boolean
+
+If you do not want a presets list you can use this boolean and you'll only see the pickers with input.
 
 ## Events
 

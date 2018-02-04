@@ -1,6 +1,8 @@
 <template>
   <div class="date-range">
-    <div class="date-range__presets">
+    <div 
+      class="date-range__presets" 
+      v-if="!noPresets">
       <v-list>
         <v-subheader>Presets</v-subheader>
         <v-list-tile
@@ -55,6 +57,10 @@ export default {
     options: {
       type: Object,
       required: true,
+    },
+    noPresets: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
