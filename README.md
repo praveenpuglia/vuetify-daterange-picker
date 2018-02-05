@@ -6,7 +6,11 @@
 
 This is absolutely fresh and new for me. Help make this component better by creating issues and if you like it, ⭐️ it. 🙌
 
-# Requirements
+## Demo
+
+[![Edit vuetify-daterange-picker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/54yno7n89p?module=%2FApp.vue)
+
+## Requirements
 
 You must have...
 
