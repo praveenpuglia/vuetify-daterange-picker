@@ -33,6 +33,8 @@ OR
 yarn add vuetify-daterange-picker
 ```
 
+The latest version(2.x) is compatible with Vuetify JS 1.x+. If you use vuetify JS you can use the version 1.2.0 or lower.
+
 ## Usage
 
 ```vue

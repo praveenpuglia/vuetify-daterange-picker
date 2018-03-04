@@ -1,15 +1,15 @@
 <template>
   <div class="date-range">
     <div 
-      class="date-range__presets" 
-      v-if="!noPresets">
+      v-if="!noPresets"
+      class="date-range__presets" >
       <v-list>
         <v-subheader>Presets</v-subheader>
         <v-list-tile
-          v-model="isPresetActive[index]"
-          ripple
           v-for="(preset, index) in presets"
+          v-model="isPresetActive[index]"
           :key="index"
+          ripple
           @click="onPresetSelect(index)">
           <v-list-tile-content>
             {{ preset.label }}
@@ -20,30 +20,32 @@
     <div class="date-range__pickers">
       <div class="date-range__picker date-range__pickers--start">
         <v-text-field
-          name="startDate"
+          v-model="formattedStartDate"
           :label="`Start Date(${format})`"
+          name="startDate"
           class="date-range__pickers-input"
           prepend-icon="event"
-          v-model="formattedStartDate"
           readonly/>
         <v-date-picker
-          @change="onDateRangeChange"
-          :allowed-dates="allowedStartDates"
+          v-model="startDate"
+          :min="options.minDate"
+          :max="endDate"
           no-title
-          v-model="startDate"/>
+          @change="onDateRangeChange"/>
       </div>
       <div class="date-range__picker date-range__picker--end">
         <v-text-field
-          name="endDate"
           :label="`End Date(${format})`"
           v-model="formattedEndDate"
+          name="endDate"
           class="date-range__pickers-input"
           readonly/>
         <v-date-picker
-          @change="onDateRangeChange"
-          :allowed-dates="allowedEndDates"
+          :min="startDate"
+          :max="today"
+          v-model="endDate"
           no-title
-          v-model="endDate"/>
+          @change="onDateRangeChange"/>
       </div>
     </div>
   </div>   
@@ -84,17 +86,8 @@ export default {
           preset.range[0] === this.startDate && preset.range[1] === this.endDate
       );
     },
-    allowedStartDates() {
-      return {
-        min: this.options.minDate,
-        max: this.endDate,
-      };
-    },
-    allowedEndDates() {
-      return {
-        min: this.startDate,
-        max: format(new Date(), 'YYYY-MM-DD'),
-      };
+    today() {
+      return format(new Date(), 'YYYY-MM-DD');
     },
   },
   watch: {

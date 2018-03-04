@@ -34,7 +34,7 @@
   "peerDependencies": {
     "date-fns": ">=1.29.0",
     "vue": ">=2.5.3",
-    "vuetify": ">=0.17.4"
+    "vuetify": ">=1.0.4"
   },
   "devDependencies": {
     "bili": "^2.2.6",
@@ -54,6 +54,6 @@
   },
   "dependencies": {
     "date-fns": "^1.29.0",
-    "vuetify": "^0.17.7"
+    "vuetify": "^1.0.4"
   }
 }
