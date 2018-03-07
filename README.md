@@ -39,15 +39,25 @@ The latest version(2.x) is compatible with Vuetify JS 1.x+. If you use vuetify J
 
 ```vue
 <template>
-    <DateRange :options="dateRangeOptions" @input="onDateRangeChange"></DateRange>
+    <v-daterange :options="dateRangeOptions" @input="onDateRangeChange"></v-daterange>
 </template>
 
 <script>
+// If you want to register this as a global component then
+// in main.js
+import VDateRagnge from 'vuetify-daterange-picker';
+import 'vuetify-daterange-picker/dist/vuetify-daterange-picker.css';
+
+Vue.use(VDateRange);
+</script>
+
+<script>
+// If you want to use in one of your components.
 import DateRange from 'vuetify-daterange-picker';
 import 'vuetify-daterange-picker/dist/vuetify-daterange-picker.css';
 
 export default {
-  components: { DateRange },
+  components: { DateRange.name: DateRange },
   ...
 };
 </script>

@@ -55,6 +55,7 @@
 import { format } from 'date-fns';
 
 export default {
+  name: 'v-daterange',
   props: {
     options: {
       type: Object,

@@ -20,9 +20,9 @@
                 <v-chip>{{ range[1] }}</v-chip>
               </p>
               <p>In this example, you can only select dates within the last 15 days.</p>
-              <DateRange
-                @input="onDateRangeChange"
+              <v-daterange
                 :options="dateRangeOptions"
+                @input="onDateRangeChange"
               />
             </v-card-text>
           </v-card>
@@ -42,10 +42,10 @@
                 <v-chip>{{ range[1] }}</v-chip>
               </p>
               <p>In this example, you can only select dates within the last 15 days.</p>
-              <DateRange
+              <v-daterange
+                :options="dateRangeOptions"
                 no-presets
                 @input="onDateRangeChange"
-                :options="dateRangeOptions"
               />
             </v-card-text>
           </v-card>
@@ -61,17 +61,17 @@
             </v-toolbar>
             <v-card-text>
               <v-alert
-                type="info"
                 :value="true"
+                type="info"
               >In this example, you can only select dates within the last 15 days.</v-alert>
               <p>From:
                 <v-chip>{{ range[0] }}</v-chip> To:
                 <v-chip>{{ range[1] }}</v-chip>
               </p>
-              <DateRange
+              <v-daterange
+                :options="dateRangeOptionsWithMinDate"
                 no-presets
                 @input="onDateRangeChange"
-                :options="dateRangeOptionsWithMinDate"
               />
             </v-card-text>
           </v-card>
@@ -93,10 +93,10 @@
                 <v-chip>{{ range[0] }}</v-chip> To:
                 <v-chip>{{ range[1] }}</v-chip>
               </p>
-              <DateRange
+              <v-daterange
+                :options="dateRangeOptionsWithMinDate"
                 no-presets
                 @input="onDateRangeChange"
-                :options="dateRangeOptionsWithMinDate"
               />
             </v-card-text>
           </v-card>
@@ -108,13 +108,8 @@
 
 <script>
 import { format, subDays } from 'date-fns';
-import '../dist/vuetify-daterange-picker.css';
-import DateRange from '../';
 
 export default {
-  components: {
-    DateRange,
-  },
   data() {
     return {
       range: [],

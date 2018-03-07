@@ -17,7 +17,7 @@
     "deploy":
       "npm run build:demo && ghpages praveenpuglia/vuetify-daterange-picker -p build",
     "test": "npm run lint",
-    "build": "bili src/DateRange.vue",
+    "build": "bili src/index.js",
     "lint": "eslint --ext js --ext vue src demo",
     "lint:fix": "npm run lint -- --fix",
     "format":
