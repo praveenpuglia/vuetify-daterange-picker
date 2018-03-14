@@ -3,13 +3,12 @@
     <div 
       v-if="!noPresets"
       class="date-range__presets" >
-      <v-list>
+      <v-list :dark="dark">
         <v-subheader>Presets</v-subheader>
         <v-list-tile
           v-for="(preset, index) in presets"
           v-model="isPresetActive[index]"
           :key="index"
-          ripple
           @click="onPresetSelect(index)">
           <v-list-tile-content>
             {{ preset.label }}
@@ -27,6 +26,9 @@
           prepend-icon="event"
           readonly/>
         <v-date-picker
+          :next-icon="nextIcon"
+          :prev-icon="prevIcon"
+          :dark="dark"
           v-model="startDate"
           :min="options.minDate"
           :max="endDate"
@@ -41,6 +43,9 @@
           class="date-range__pickers-input"
           readonly/>
         <v-date-picker
+          :next-icon="nextIcon"
+          :prev-icon="prevIcon"
+          :dark="dark"
           :min="startDate"
           :max="today"
           v-model="endDate"
@@ -64,6 +69,18 @@ export default {
     noPresets: {
       type: Boolean,
       default: false,
+    },
+    dark: {
+      type: Boolean,
+      default: false,
+    },
+    nextIcon: {
+      type: String,
+      default: 'chevron_right',
+    },
+    prevIcon: {
+      type: String,
+      default: 'chevron_left',
     },
   },
   data() {

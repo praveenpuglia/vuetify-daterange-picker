@@ -8,7 +8,7 @@ This is absolutely fresh and new for me. Help make this component better by crea
 
 ## Demo
 
-[![Edit vuetify-daterange-picker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/54yno7n89p?module=%2FApp.vue)
+[![Edit vuetify-daterange-picker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/q9vzox5y6j)
 
 ## Requirements
 
@@ -24,6 +24,8 @@ You must have...
 * Automatically highlight preset based on chosen date.
 * Custom format
 * Material Design (Obviously!)
+* Light & Dark Themes
+* Custom Prev & Next buttons
 
 ## Installation
 
@@ -90,6 +92,18 @@ presets: [
 #### `no-presets` : Boolean
 
 If you do not want a presets list you can use this boolean and you'll only see the pickers with input.
+
+#### `dark` : Boolean
+
+Switches the list of presets and the datepickers into dark mode.
+
+#### `next-icon` : String
+
+Name of the Material Icon that you want to use as custom icon for next buttons in datepickers.
+
+#### `prev-icon` : String
+
+Name of the Material Icon that you want to use as custom icon for prev buttons in datepickers.
 
 ## Events
 

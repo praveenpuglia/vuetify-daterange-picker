@@ -78,7 +78,6 @@
         </v-flex>
         <v-flex xs12>
           <v-card
-            dark
             class="daterange--dark"
           >
             <v-toolbar
@@ -94,8 +93,33 @@
                 <v-chip>{{ range[1] }}</v-chip>
               </p>
               <v-daterange
-                :options="dateRangeOptionsWithMinDate"
-                no-presets
+                :options="dateRangeOptions"
+                dark
+                @input="onDateRangeChange"
+              />
+            </v-card-text>
+          </v-card>
+        </v-flex>
+        <v-flex xs12>
+          <v-card
+            class="daterange--dark"
+          >
+            <v-toolbar
+              dark
+              flat
+              color="primary"
+            >
+              <v-toolbar-title>Custom Icons</v-toolbar-title>
+            </v-toolbar>
+            <v-card-text>
+              <p>From:
+                <v-chip>{{ range[0] }}</v-chip> To:
+                <v-chip>{{ range[1] }}</v-chip>
+              </p>
+              <v-daterange
+                :options="dateRangeOptions"
+                next-icon="arrow_forward"
+                prev-icon="arrow_back"
                 @input="onDateRangeChange"
               />
             </v-card-text>
