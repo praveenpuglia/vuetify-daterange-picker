@@ -1,15 +1,17 @@
 <template>
   <div class="date-range">
-    <div 
+    <div
       v-if="!noPresets"
-      class="date-range__presets" >
+      class="date-range__presets"
+    >
       <v-list :dark="dark">
         <v-subheader>Presets</v-subheader>
         <v-list-tile
           v-for="(preset, index) in presets"
           v-model="isPresetActive[index]"
           :key="index"
-          @click="onPresetSelect(index)">
+          @click="onPresetSelect(index)"
+        >
           <v-list-tile-content>
             {{ preset.label }}
           </v-list-tile-content>
@@ -20,12 +22,14 @@
       <div class="date-range__picker date-range__pickers--start">
         <v-text-field
           v-model="formattedStartDate"
-          :label="`Start Date(${format})`"
+          :label="`${labels.start}(${format})`"
           name="startDate"
           class="date-range__pickers-input"
           prepend-icon="event"
-          readonly/>
+          readonly
+        />
         <v-date-picker
+          :allowed-dates="allowedDates"
           :next-icon="nextIcon"
           :prev-icon="prevIcon"
           :dark="dark"
@@ -33,15 +37,17 @@
           :min="options.minDate"
           :max="endDate"
           no-title
-          @change="onDateRangeChange"/>
+          @change="onDateRangeChange"
+        />
       </div>
       <div class="date-range__picker date-range__picker--end">
         <v-text-field
-          :label="`End Date(${format})`"
+          :label="`${labels.end}(${format})`"
           v-model="formattedEndDate"
           name="endDate"
           class="date-range__pickers-input"
-          readonly/>
+          readonly
+        />
         <v-date-picker
           :next-icon="nextIcon"
           :prev-icon="prevIcon"
@@ -50,10 +56,11 @@
           :max="today"
           v-model="endDate"
           no-title
-          @change="onDateRangeChange"/>
+          @change="onDateRangeChange"
+        />
       </div>
     </div>
-  </div>   
+  </div>
 </template>
 
 <script>
@@ -81,6 +88,15 @@ export default {
     prevIcon: {
       type: String,
       default: 'chevron_left',
+    },
+    labels: {
+      type: Object,
+      default() {
+        return {
+          start: 'Start Date',
+          end: 'End Date',
+        };
+      },
     },
   },
   data() {
@@ -132,12 +148,15 @@ export default {
 .date-range {
   display: flex;
 }
+
 .date-range__presets {
   margin-right: 1rem;
 }
+
 .date-range__pickers {
   display: flex;
 }
+
 .date-range__picker {
   padding: 0 1rem;
 }

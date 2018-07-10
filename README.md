@@ -105,6 +105,17 @@ Name of the Material Icon that you want to use as custom icon for next buttons i
 
 Name of the Material Icon that you want to use as custom icon for prev buttons in datepickers.
 
+#### `labels` : Object
+
+An object containing the labels that should be displayed for the calendar input fields. Default :
+
+```js
+{
+  start: 'Start Date',
+  end: 'End Date'
+}
+```
+
 ## Events
 
 * `input`: **Array**. An array with start date and end date, triggered after every date selection.
