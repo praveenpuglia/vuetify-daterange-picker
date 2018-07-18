@@ -129,7 +129,6 @@ Sets the first day of the week, starting with 0 for Sunday. Default : `0`
 
 Maps to the date picker's `firstDayOfWeek` property. See Vuetify's [documentation](https://vuetifyjs.com/en/components/date-pickers).
 
-
 ## Events
 
 * `input`: **Array**. An array with start date and end date, triggered after every date selection.
