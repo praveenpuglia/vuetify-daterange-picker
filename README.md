@@ -112,9 +112,23 @@ An object containing the labels that should be displayed for the calendar input 
 ```js
 {
   start: 'Start Date',
-  end: 'End Date'
+  end: 'End Date',
+  preset: 'Presets'
 }
 ```
+
+#### `locale` : String
+
+Sets the locale. Accepts a string with a BCP 47 language tag. Default : `en-us`
+
+Maps to the date picker's `locale` property. See Vuetify's [documentation](https://vuetifyjs.com/en/components/date-pickers).
+
+#### `firstDayOfWeek` : Number
+
+Sets the first day of the week, starting with 0 for Sunday. Default : `0`
+
+Maps to the date picker's `firstDayOfWeek` property. See Vuetify's [documentation](https://vuetifyjs.com/en/components/date-pickers).
+
 
 ## Events
 
