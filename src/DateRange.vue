@@ -57,6 +57,8 @@
           :min="startDate"
           :max="today"
           v-model="endDate"
+          :locale="locale"
+          :first-day-of-week="firstDayOfWeek"
           no-title
           @change="onDateRangeChange"
         />
