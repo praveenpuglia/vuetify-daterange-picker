@@ -5,7 +5,7 @@
       class="date-range__presets"
     >
       <v-list :dark="dark">
-        <v-subheader>Presets</v-subheader>
+        <v-subheader>{{labels.preset}}</v-subheader>
         <v-list-tile
           v-for="(preset, index) in presets"
           v-model="isPresetActive[index]"
@@ -36,6 +36,8 @@
           v-model="startDate"
           :min="options.minDate"
           :max="endDate"
+          :locale="locale"
+          :first-day-of-week="firstDayOfWeek"
           no-title
           @change="onDateRangeChange"
         />
@@ -95,9 +97,18 @@ export default {
         return {
           start: 'Start Date',
           end: 'End Date',
+          preset: 'Presets'
         };
       },
     },
+    locale: {
+      type: String,
+      default: 'en-us',
+    },
+    firstDayOfWeek: {
+      type: Number,
+      default: 0,
+    }
   },
   data() {
     return {
