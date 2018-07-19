@@ -123,7 +123,7 @@ Sets the locale. Accepts a string with a BCP 47 language tag. Default : `en-us`
 
 Maps to the date picker's `locale` property. See Vuetify's [documentation](https://vuetifyjs.com/en/components/date-pickers).
 
-#### `firstDayOfWeek` : Number
+#### `first-day-of-week` : Number
 
 Sets the first day of the week, starting with 0 for Sunday. Default : `0`
 
