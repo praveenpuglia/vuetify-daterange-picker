@@ -47,7 +47,7 @@ The latest version(2.x) is compatible with Vuetify JS 1.x+. If you use vuetify J
 <script>
 // If you want to register this as a global component then
 // in main.js
-import VDateRagnge from 'vuetify-daterange-picker';
+import VDateRange from 'vuetify-daterange-picker';
 import 'vuetify-daterange-picker/dist/vuetify-daterange-picker.css';
 
 Vue.use(VDateRange);
