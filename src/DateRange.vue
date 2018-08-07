@@ -5,7 +5,7 @@
       class="date-range__presets"
     >
       <v-list :dark="dark">
-        <v-subheader>{{labels.preset}}</v-subheader>
+        <v-subheader>{{ labels.preset }}</v-subheader>
         <v-list-tile
           v-for="(preset, index) in presets"
           v-model="isPresetActive[index]"
@@ -55,7 +55,7 @@
           :prev-icon="prevIcon"
           :dark="dark"
           :min="startDate"
-          :max="today"
+          :max="maxDate"
           v-model="endDate"
           :locale="locale"
           :first-day-of-week="firstDayOfWeek"
@@ -99,7 +99,7 @@ export default {
         return {
           start: 'Start Date',
           end: 'End Date',
-          preset: 'Presets'
+          preset: 'Presets',
         };
       },
     },
@@ -110,7 +110,7 @@ export default {
     firstDayOfWeek: {
       type: Number,
       default: 0,
-    }
+    },
   },
   data() {
     return {
@@ -135,6 +135,9 @@ export default {
     },
     today() {
       return format(new Date(), 'YYYY-MM-DD');
+    },
+    maxDate() {
+      return this.options.maxDate || this.today;
     },
   },
   watch: {

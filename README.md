@@ -73,7 +73,8 @@ Options is an object that helps set up the component.
 
 * `startDate`: **String**. In `YYYY-MM-DD` format. Prefill value for start date picker.
 * `endDate`: **String**. In `YYYY-MM-DD` format. Prefill value for end date picker.
-* `minDate`: **String**. The earliest date a user can select in `YYYY-MM-DD` format.
+* `minDate`: **String**. The minimum date a user can select in `YYYY-MM-DD` format.
+* `maxDate`: **String**. The maximum date a user can select in `YYYY-MM-DD` format. If not provided, it defaults to TODAY.
 * `format`: **String**. The format in which you want the user to see the dates in the inputs. E.g. `MM/DD/YYYY`.
 * `presets`: **Array**. An array of preset values like `Today`, `Yesterday` etc. It's an array of object that looks like this.
 

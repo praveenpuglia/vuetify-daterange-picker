@@ -57,13 +57,13 @@
               flat
               color="primary"
             >
-              <v-toolbar-title>Minimun Selectable Date</v-toolbar-title>
+              <v-toolbar-title>Minimun & Maximum Selectable Date</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
               <v-alert
                 :value="true"
                 type="info"
-              >In this example, you can only select dates within the last 15 days.</v-alert>
+              >In this example, you can only select dates within the last 15 days & 20 days ahead.</v-alert>
               <p>From:
                 <v-chip>{{ range[0] }}</v-chip> To:
                 <v-chip>{{ range[1] }}</v-chip>
@@ -173,7 +173,7 @@
 </template>
 
 <script>
-import { format, subDays } from 'date-fns';
+import { format, subDays, addDays } from 'date-fns';
 
 export default {
   data() {
@@ -211,6 +211,7 @@ export default {
         startDate: format(subDays(new Date(), 7), 'YYYY-MM-DD'),
         endDate: format(new Date(), 'YYYY-MM-DD'),
         minDate: format(subDays(new Date(), 15), 'YYYY-MM-DD'),
+        maxDate: format(addDays(new Date(), 20), 'YYYY-MM-DD'),
         format: 'MM/DD/YYYY',
         presets: [
           {
