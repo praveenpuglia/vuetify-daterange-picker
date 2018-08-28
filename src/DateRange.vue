@@ -33,6 +33,8 @@
           :next-icon="nextIcon"
           :prev-icon="prevIcon"
           :dark="dark"
+          :events="dateRange.dates"
+          :event-color="dateRange.colors"
           v-model="startDate"
           :min="options.minDate"
           :max="endDate"
@@ -56,6 +58,8 @@
           :dark="dark"
           :min="startDate"
           :max="maxDate"
+          :events="dateRange.dates"
+          :event-color="dateRange.colors"
           v-model="endDate"
           :locale="locale"
           :first-day-of-week="firstDayOfWeek"
@@ -118,6 +122,10 @@ export default {
       endDate: this.options.endDate,
       format: this.options.format,
       presets: this.options.presets,
+      dateRange: {
+        dates: [],
+        colors: {},
+      },
     };
   },
   computed: {
@@ -148,13 +156,47 @@ export default {
       this.onDateRangeChange();
     },
   },
+  mounted() {
+    this.setDateRangeData();
+  },
   methods: {
     onPresetSelect(presetIndex) {
       this.startDate = this.presets[presetIndex].range[0];
       this.endDate = this.presets[presetIndex].range[1];
     },
     onDateRangeChange() {
+      this.setDateRangeData();
       this.$emit('input', [this.startDate, this.endDate]);
+    },
+    setDateRangeData() {
+      const startDate = new Date(this.startDate);
+      const endDate = new Date(this.endDate);
+      const diffDays = (endDate - startDate) / (1000 * 3600 * 24);
+
+      const dateRange = {
+        dates: [],
+        colors: {},
+      };
+
+      for (let i = 0; i <= diffDays; i += 1) {
+        const date = this.addDays(startDate.toDateString(), i);
+        dateRange.dates.push(date);
+
+        if (i === 0) {
+          dateRange.colors[date] = 'custom-date-picker-range start';
+        } else if (i === diffDays) {
+          dateRange.colors[date] = 'custom-date-picker-range end';
+        } else {
+          dateRange.colors[date] = 'custom-date-picker-range';
+        }
+      }
+
+      this.dateRange = dateRange;
+    },
+    addDays(date, days) {
+      const result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return format(result, 'YYYY-MM-DD');
     },
   },
 };
@@ -175,5 +217,31 @@ export default {
 
 .date-range__picker {
   padding: 0 1rem;
+}
+</style>
+<style>
+.custom-date-picker-range {
+  z-index: 1;
+  top: 0;
+  left: 5px;
+  width: 100%;
+  border-radius: 0;
+  height: 100%;
+  background-color: rgba(128, 216, 255, 0.2);
+}
+.date-picker-table table {
+  border-collapse: collapse;
+}
+.custom-date-picker-range.start {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+.custom-date-picker-range.end {
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  width: 32px;
+}
+.date-picker-table button.btn--flat {
+  z-index: 2;
 }
 </style>
