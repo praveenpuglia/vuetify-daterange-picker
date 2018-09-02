@@ -33,8 +33,8 @@
           :next-icon="nextIcon"
           :prev-icon="prevIcon"
           :dark="dark"
-          :events="dateRange.dates"
-          :event-color="dateRange.colors"
+          :events="inRange ? dateRange.dates : events"
+          :event-color="inRange ? dateRange.colors : eventColor"
           v-model="startDate"
           :min="options.minDate"
           :max="endDate"
@@ -58,8 +58,8 @@
           :dark="dark"
           :min="startDate"
           :max="maxDate"
-          :events="dateRange.dates"
-          :event-color="dateRange.colors"
+          :events="inRange ? dateRange.dates : events"
+          :event-color="inRange ? dateRange.colors : eventColor"
           v-model="endDate"
           :locale="locale"
           :first-day-of-week="firstDayOfWeek"
@@ -106,6 +106,22 @@ export default {
           preset: 'Presets',
         };
       },
+    },
+    events: {
+      type: [Array, Object, Function],
+      default: () => null,
+    },
+    eventColor: {
+      type: [String, Function, Object],
+      default: 'warning',
+    },
+    inRange: {
+      type: Boolean,
+      default: false,
+    },
+    inRangeColor: {
+      type: String,
+      default: 'blue lighten-4',
     },
     locale: {
       type: String,
@@ -157,7 +173,7 @@ export default {
     },
   },
   mounted() {
-    this.setDateRangeData();
+    if (this.inRange) this.setInRangeData();
   },
   methods: {
     onPresetSelect(presetIndex) {
@@ -165,33 +181,31 @@ export default {
       this.endDate = this.presets[presetIndex].range[1];
     },
     onDateRangeChange() {
-      this.setDateRangeData();
+      if (this.inRange) this.setInRangeData();
       this.$emit('input', [this.startDate, this.endDate]);
     },
-    setDateRangeData() {
-      const startDate = new Date(this.startDate);
-      const endDate = new Date(this.endDate);
-      const diffDays = (endDate - startDate) / (1000 * 3600 * 24);
-
-      const dateRange = {
+    setInRangeData() {
+      const inRangeData = {
         dates: [],
         colors: {},
       };
 
-      for (let i = 0; i <= diffDays; i += 1) {
-        const date = this.addDays(startDate.toDateString(), i);
-        dateRange.dates.push(date);
+      if (this.inRange) {
+        const startDate = new Date(this.startDate);
+        const endDate = new Date(this.endDate);
+        const diffDays = (endDate - startDate) / (1000 * 3600 * 24);
 
-        if (i === 0) {
-          dateRange.colors[date] = 'custom-date-picker-range start';
-        } else if (i === diffDays) {
-          dateRange.colors[date] = 'custom-date-picker-range end';
-        } else {
-          dateRange.colors[date] = 'custom-date-picker-range';
+        for (let i = 0; i <= diffDays; i += 1) {
+          const date = this.addDays(startDate.toDateString(), i);
+          inRangeData.dates.push(date);
+          inRangeData.colors[date] = `daterange-in-range ${this.inRangeColor}`;
+
+          if (i === 0) inRangeData.colors[date] += ' start';
+          if (i === diffDays) inRangeData.colors[date] += ' end';
         }
       }
 
-      this.dateRange = dateRange;
+      this.dateRange = inRangeData;
     },
     addDays(date, days) {
       const result = new Date(date);
@@ -218,30 +232,32 @@ export default {
 .date-range__picker {
   padding: 0 1rem;
 }
-</style>
-<style>
-.custom-date-picker-range {
-  z-index: 1;
-  top: 0;
-  left: 5px;
-  width: 100%;
-  border-radius: 0;
-  height: 100%;
-  background-color: rgba(128, 216, 255, 0.2);
-}
 .date-picker-table table {
   border-collapse: collapse;
 }
-.custom-date-picker-range.start {
+.date-picker-table__event.daterange-in-range {
+  z-index: 0;
+  /* override existing settings */
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 0;
+}
+.date-picker-table__event.daterange-in-range.start {
   border-top-left-radius: 50%;
   border-bottom-left-radius: 50%;
+  /* Cover only date button */
+  left: 7px;
+  width: 31px;
 }
-.custom-date-picker-range.end {
+.date-picker-table__event.daterange-in-range.end {
   border-top-right-radius: 50%;
   border-bottom-right-radius: 50%;
-  width: 32px;
 }
-.date-picker-table button.btn--flat {
-  z-index: 2;
+.date-picker-table .btn {
+  /* fixed zIndex is needed because .date-picker-table__event div is created after the .btn button */
+  z-index: 1;
 }
 </style>

@@ -22,6 +22,8 @@
               <p>In this example, you can only select dates within the last 15 days.</p>
               <v-daterange
                 :options="dateRangeOptions"
+                in-range
+                in-range-color="light-blue accent-1"
                 @input="onDateRangeChange"
               />
             </v-card-text>
@@ -44,6 +46,7 @@
               <p>In this example, you can only select dates within the last 15 days.</p>
               <v-daterange
                 :options="dateRangeOptions"
+                :events="['2018-09-01']"
                 no-presets
                 @input="onDateRangeChange"
               />
