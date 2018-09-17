@@ -2,7 +2,7 @@
   "name": "vuetify-daterange-picker",
   "description":
     "The missing date range picker for Vuetify JS you have been looking for",
-  "version": "2.4.1",
+  "version": "2.5.0",
   "main": "dist/vuetify-daterange-picker.cjs.js",
   "module": "dist/vuetify-daterange-picker.es.js",
   "browser": "dist/vuetify-daterange-picker.js",
