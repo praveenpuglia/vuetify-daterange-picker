@@ -33,8 +33,8 @@
           :next-icon="nextIcon"
           :prev-icon="prevIcon"
           :dark="dark"
-          :events="inRange ? dateRange.dates : events"
-          :event-color="inRange ? dateRange.colors : eventColor"
+          :events="highlightRange ? dateRange.dates : events"
+          :event-color="highlightRange ? dateRange.colors : eventColor"
           v-model="startDate"
           :min="options.minDate"
           :max="endDate"
@@ -58,8 +58,8 @@
           :dark="dark"
           :min="startDate"
           :max="maxDate"
-          :events="inRange ? dateRange.dates : events"
-          :event-color="inRange ? dateRange.colors : eventColor"
+          :events="highlightRange ? dateRange.dates : events"
+          :event-color="highlightRange ? dateRange.colors : eventColor"
           v-model="endDate"
           :locale="locale"
           :first-day-of-week="firstDayOfWeek"
@@ -115,13 +115,13 @@ export default {
       type: [String, Function, Object],
       default: 'warning',
     },
-    inRange: {
+    highlightRange: {
       type: Boolean,
-      default: false,
+      default: true,
     },
-    inRangeColor: {
+    highlightColors: {
       type: String,
-      default: 'blue lighten-4',
+      default: '',
     },
     locale: {
       type: String,
@@ -151,6 +151,12 @@ export default {
     formattedEndDate() {
       return format(new Date(this.endDate), this.format);
     },
+    highlightColorClasses() {
+      if (this.highlightColors) {
+        return this.highlightColors;
+      }
+      return this.dark ? 'blue-grey darken-1' : 'blue lighten-5';
+    },
     isPresetActive() {
       return this.presets.map(
         preset =>
@@ -173,7 +179,7 @@ export default {
     },
   },
   mounted() {
-    if (this.inRange) this.setInRangeData();
+    if (this.highlightRange) this.setInRangeData();
   },
   methods: {
     onPresetSelect(presetIndex) {
@@ -181,7 +187,7 @@ export default {
       this.endDate = this.presets[presetIndex].range[1];
     },
     onDateRangeChange() {
-      if (this.inRange) this.setInRangeData();
+      if (this.highlightRange) this.setInRangeData();
       this.$emit('input', [this.startDate, this.endDate]);
     },
     setInRangeData() {
@@ -190,7 +196,7 @@ export default {
         colors: {},
       };
 
-      if (this.inRange) {
+      if (this.highlightRange) {
         const startDate = new Date(this.startDate);
         const endDate = new Date(this.endDate);
         const diffDays = (endDate - startDate) / (1000 * 3600 * 24);
@@ -198,10 +204,13 @@ export default {
         for (let i = 0; i <= diffDays; i += 1) {
           const date = this.addDays(startDate.toDateString(), i);
           inRangeData.dates.push(date);
-          inRangeData.colors[date] = `daterange-in-range ${this.inRangeColor}`;
+          inRangeData.colors[date] = `date-range__date-in-range ${
+            this.highlightColorClasses
+          }`;
 
-          if (i === 0) inRangeData.colors[date] += ' start';
-          if (i === diffDays) inRangeData.colors[date] += ' end';
+          if (i === 0) inRangeData.colors[date] += ' date-range__range-start';
+          if (i === diffDays)
+            inRangeData.colors[date] += ' date-range__range-end';
         }
       }
 
@@ -232,10 +241,10 @@ export default {
 .date-range__picker {
   padding: 0 1rem;
 }
-.date-picker-table table {
+.date-range >>> .date-picker-table table {
   border-collapse: collapse;
 }
-.date-picker-table__event.daterange-in-range {
+.date-range >>> .date-picker-table__event.date-range__date-in-range {
   z-index: 0;
   /* override existing settings */
   width: 100%;
@@ -245,18 +254,20 @@ export default {
   bottom: 0;
   border-radius: 0;
 }
-.date-picker-table__event.daterange-in-range.start {
+.date-range
+  >>> .date-picker-table__event.date-range__date-in-range.date-range__range-start {
   border-top-left-radius: 50%;
   border-bottom-left-radius: 50%;
   /* Cover only date button */
   left: 7px;
   width: 31px;
 }
-.date-picker-table__event.daterange-in-range.end {
+.date-range
+  >>> .date-picker-table__event.date-range__date-in-range.date-range__range-end {
   border-top-right-radius: 50%;
   border-bottom-right-radius: 50%;
 }
-.date-picker-table .btn {
+.date-range >>> .date-picker-table .btn {
   /* fixed zIndex is needed because .date-picker-table__event div is created after the .btn button */
   z-index: 1;
 }

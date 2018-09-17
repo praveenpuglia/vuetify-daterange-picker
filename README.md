@@ -130,6 +130,14 @@ Sets the first day of the week, starting with 0 for Sunday. Default : `0`
 
 Maps to the date picker's `firstDayOfWeek` property. See Vuetify's [documentation](https://vuetifyjs.com/en/components/date-pickers).
 
+#### <kbd>NEW</kbd> `highlight-range` : Boolean
+
+Whether or not the selected range should be highlighted. Default : true
+
+#### <kbd>NEW</kbd> `highlight-colors` : String
+
+Which classes from the vuetify [material color palette](https://vuetifyjs.com/en/style/colors) should be applied to each date that's in range. Default : `blue lighten-5` for light mode and `blue-grey darken-1` for dark mode.
+
 ## Events
 
 * `input`: **Array**. An array with start date and end date, triggered after every date selection.
