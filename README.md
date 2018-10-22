@@ -1,14 +1,10 @@
 # Vuetify Date Range Picker
 
-> The missing date range picker for Vuetify JS you have been looking for. ![Date Range Picker](https://raw.githubusercontent.com/praveenpuglia/vuetify-daterange-picker/1eb3ba1d/public/updated-date-range-lres.gif)
+> The missing date range picker for Vuetify JS you have been looking for. ![Date Range Picker](./tree/master/public/vuetify-daterange-picker.gif)
 
 ## Heads Up
 
 This is absolutely fresh and new for me. Help make this component better by creating issues and if you like it, ⭐️ it. 🙌
-
-## Demo
-
-[![Edit vuetify-daterange-picker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/q9vzox5y6j)
 
 ## Requirements
 
@@ -26,6 +22,7 @@ You must have...
 * Material Design (Obviously!)
 * Light & Dark Themes
 * Custom Prev & Next buttons
+* <kbd>NEW</kbd> Range Highlighting
 
 ## Installation
 
