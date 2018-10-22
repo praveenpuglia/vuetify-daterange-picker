@@ -1,6 +1,6 @@
 # Vuetify Date Range Picker
 
-> The missing date range picker for Vuetify JS you have been looking for. ![Date Range Picker](./tree/master/public/vuetify-daterange-picker.gif)
+> The missing date range picker for Vuetify JS you have been looking for. ![Date Range Picker](https://raw.githubusercontent.com/praveenpuglia/vuetify-daterange-picker/master/public/vuetify-daterange-picker.gif)
 
 ## Heads Up
 
