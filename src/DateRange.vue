@@ -146,10 +146,12 @@ export default {
   },
   computed: {
     formattedStartDate() {
-      return format(new Date(this.startDate), this.format);
+      return this.startDate
+        ? format(new Date(this.startDate), this.format)
+        : '';
     },
     formattedEndDate() {
-      return format(new Date(this.endDate), this.format);
+      return this.endDate ? format(new Date(this.endDate), this.format) : '';
     },
     highlightColorClasses() {
       if (this.highlightColors) {
