@@ -29,7 +29,6 @@
           readonly
         />
         <v-date-picker
-          :allowed-dates="allowedDates"
           :next-icon="nextIcon"
           :prev-icon="prevIcon"
           :dark="dark"
