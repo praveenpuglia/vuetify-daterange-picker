@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 
 export default {
   name: 'v-daterange',
@@ -146,11 +146,11 @@ export default {
   computed: {
     formattedStartDate() {
       return this.startDate
-        ? format(new Date(this.startDate), this.format)
+        ? format(parse(this.startDate), this.format)
         : '';
     },
     formattedEndDate() {
-      return this.endDate ? format(new Date(this.endDate), this.format) : '';
+      return this.endDate ? format(parse(this.endDate), this.format) : '';
     },
     highlightColorClasses() {
       if (this.highlightColors) {
@@ -198,8 +198,8 @@ export default {
       };
 
       if (this.highlightRange) {
-        const startDate = new Date(this.startDate);
-        const endDate = new Date(this.endDate);
+        const startDate = parse(this.startDate);
+        const endDate = parse(this.endDate);
         const diffDays = (endDate - startDate) / (1000 * 3600 * 24);
 
         for (let i = 0; i <= diffDays; i += 1) {
@@ -218,7 +218,7 @@ export default {
       this.dateRange = inRangeData;
     },
     addDays(date, days) {
-      const result = new Date(date);
+      const result = parse(date);
       result.setDate(result.getDate() + days);
       return format(result, 'YYYY-MM-DD');
     },
