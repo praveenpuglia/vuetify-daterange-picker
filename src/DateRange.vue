@@ -25,7 +25,7 @@
           :label="`${labels.start}(${format})`"
           name="startDate"
           class="date-range__pickers-input"
-          :prepend-icon="inputIcon"
+          :prepend-icon="prependIcon"
           readonly
         />
         <v-date-picker
@@ -88,7 +88,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    inputIcon: {
+    prependIcon: {
       type: String,
       default: 'event',
     },

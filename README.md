@@ -95,7 +95,7 @@ If you do not want a presets list you can use this boolean and you'll only see t
 
 Switches the list of presets and the datepickers into dark mode.
 
-#### `input-icon` : String
+#### `prepend-icon` : String
 
 Name of the Material Icon that you want to use as custom icon for input prepend icon.
 
