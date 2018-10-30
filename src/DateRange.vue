@@ -242,10 +242,10 @@ export default {
 .date-range__picker {
   padding: 0 1rem;
 }
-.date-range >>> .date-picker-table table {
+.date-range >>> .date-picker-table table, .date-range >>> .v-date-picker-table table {
   border-collapse: collapse;
 }
-.date-range >>> .date-picker-table__event.date-range__date-in-range {
+.date-range >>> .date-picker-table__event.date-range__date-in-range, .date-range >>> .v-date-picker-table__event.date-range__date-in-range {
   z-index: 0;
   /* override existing settings */
   width: 100%;
@@ -256,7 +256,9 @@ export default {
   border-radius: 0;
 }
 .date-range
-  >>> .date-picker-table__event.date-range__date-in-range.date-range__range-start {
+  >>> .date-picker-table__event.date-range__date-in-range.date-range__range-start,
+  .date-range
+    >>> .v-date-picker-table__event.date-range__date-in-range.date-range__range-start {
   border-top-left-radius: 50%;
   border-bottom-left-radius: 50%;
   /* Cover only date button */
@@ -264,11 +266,13 @@ export default {
   width: 31px;
 }
 .date-range
-  >>> .date-picker-table__event.date-range__date-in-range.date-range__range-end {
+  >>> .date-picker-table__event.date-range__date-in-range.date-range__range-end,
+  .date-range
+    >>> .v-date-picker-table__event.date-range__date-in-range.date-range__range-end {
   border-top-right-radius: 50%;
   border-bottom-right-radius: 50%;
 }
-.date-range >>> .date-picker-table .btn {
+.date-range >>> .date-picker-table .btn, .date-range >>> .v-date-picker-table .v-btn {
   /* fixed zIndex is needed because .date-picker-table__event div is created after the .btn button */
   z-index: 1;
 }
