@@ -7,3 +7,4 @@ const VDateRange = {
 };
 
 export default VDateRange;
+export { DateRange };

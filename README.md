@@ -52,11 +52,11 @@ Vue.use(VDateRange);
 
 <script>
 // If you want to use in one of your components.
-import DateRange from 'vuetify-daterange-picker';
+import { DateRange } from 'vuetify-daterange-picker';
 import 'vuetify-daterange-picker/dist/vuetify-daterange-picker.css';
 
 export default {
-  components: { DateRange.name: DateRange },
+  components: { [DateRange.name]: DateRange },
   ...
 };
 </script>
