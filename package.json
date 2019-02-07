@@ -1,12 +1,14 @@
 {
   "name": "vuetify-daterange-picker-test",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "main": "./dist/vuetify-daterange-picker-test.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "build:lib": "vue-cli-service build --target lib --name vuetify-daterange ./src/components/index.js",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "prepublish": "yarn build:lib"
   },
   "files": [
     "dist/*",
