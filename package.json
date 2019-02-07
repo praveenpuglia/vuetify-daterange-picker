@@ -1,6 +1,6 @@
 {
   "name": "vuetify-daterange-picker-test",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "./dist/vrange.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
