@@ -1,12 +1,12 @@
 {
   "name": "vuetify-daterange-picker-test",
-  "version": "0.0.3",
-  "main": "./dist/vuetify-daterange-picker-test.common.js",
+  "version": "0.0.4",
+  "main": "./dist/vrange.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build:lib": "vue-cli-service build --target lib --name vuetify-daterange-picker-test ./src/components/index.js",
+    "build:lib": "vue-cli-service build --target lib --name vrange ./src/components/index.js",
     "test:unit": "vue-cli-service test:unit",
     "prepublish": "yarn build:lib"
   },
