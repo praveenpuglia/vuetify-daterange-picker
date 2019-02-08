@@ -202,9 +202,8 @@ export default {
   }
 };
 </script>
-
 <style scoped>
-.v-date-range__input {
-  width: 280px;
+.v-date-range__input-field >>> input {
+  text-align: center;
 }
 </style>

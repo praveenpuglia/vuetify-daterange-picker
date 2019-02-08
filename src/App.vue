@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       range: {},
-      inputProps: { box: true, class: ['praveen'] },
+      inputProps: { box: true, style: { width: '240px' } },
       menuProps: { offsetY: true, closeOnContentClick: false }
     };
   }
