@@ -5,9 +5,10 @@
         <v-container>
           <v-date-range
             v-model="range"
-            displayFormat="dddd, MMMM Do YYYY"
+            display-format="DD-MM-YYYY"
             no-title
-            :input-props="{ solo: true }"
+            :input-props="inputProps"
+            :menu-props="menuProps"
           >
             <h1 slot="title">klasdf</h1>
           </v-date-range>
@@ -23,7 +24,9 @@ export default {
   components: { VDateRange },
   data() {
     return {
-      range: {}
+      range: {},
+      inputProps: { box: true, class: ['praveen'] },
+      menuProps: { offsetY: true, closeOnContentClick: false }
     };
   }
 };

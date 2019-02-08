@@ -1,15 +1,19 @@
 <template>
   <div class="v-date-range">
-    <v-menu v-model="menu" :close-on-content-click="false" offset-y>
+    <v-menu
+      v-model="menu"
+      :close-on-content-click="false"
+      offset-y
+      v-bind="menuProps"
+    >
       <div slot="activator" class="v-date-range__input">
-        <div class="d-flex">
-          <v-text-field
-            :value="inputValue"
-            readonly
-            :placeholder="placeholder"
-            v-bind="inputProps"
-          ></v-text-field>
-        </div>
+        <v-text-field
+          class="v-date-range__input-field"
+          :value="inputValue"
+          readonly
+          :placeholder="placeholder"
+          v-bind="inputProps"
+        ></v-text-field>
       </div>
       <v-card class="v-date-range__menu-content">
         <v-card-text>
@@ -119,6 +123,12 @@ export default {
       default: () => {
         return {};
       }
+    },
+    menuProps: {
+      type: Object,
+      default: () => {
+        return {};
+      }
     }
   },
   data() {
@@ -139,10 +149,10 @@ export default {
       const end = this.displayFormat
         ? this.formatDate(this.value.end, this.displayFormat)
         : this.value.end;
-      return `${start} ${this.separatorLabel} ${end}`;
+      return `${start}    ${this.separatorLabel}     ${end}`;
     },
     placeholder() {
-      return `${this.startLabel} ${this.separatorLabel} ${this.endLabel}`;
+      return `${this.startLabel}    ${this.separatorLabel}    ${this.endLabel}`;
     },
     /**
      * If the value prop doesn't have any start value,
@@ -193,8 +203,8 @@ export default {
 };
 </script>
 
-<style>
-button {
-  color: blue;
+<style scoped>
+.v-date-range__input {
+  width: 280px;
 }
 </style>
