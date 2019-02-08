@@ -23,23 +23,28 @@
             </v-card-title>
             <v-card-text>
               <v-date-picker
-                class="mr-4"
+                class="mr-4 v-date-range__picker--start v-date-range__picker"
                 v-model="pickerStart"
                 :locale="locale"
                 :min="min"
-                :max="max"
+                :max="pickerEnd"
                 :no-title="noTitle"
                 :next-icon="nextIcon"
                 :prev-icon="prevIcon"
+                :events="highlightDates"
+                :event-color="highlightClasses"
               ></v-date-picker>
               <v-date-picker
+                class="v-date-range__picker--end v-date-range__picker"
                 v-model="pickerEnd"
                 :locale="locale"
-                :min="min"
+                :min="pickerStart"
                 :max="max"
                 :no-title="noTitle"
                 :next-icon="nextIcon"
                 :prev-icon="prevIcon"
+                :events="highlightDates"
+                :event-color="highlightClasses"
               ></v-date-picker>
             </v-card-text>
           </div>
@@ -47,15 +52,19 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn flat @click="menu = false">Cancel</v-btn>
-          <v-btn @click="applyRange" color="primary">Apply</v-btn>
+          <v-btn @click="applyRange" color="primary" :disabled="!bothSelected"
+            >Apply</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-menu>
   </div>
 </template>
 <script>
-import { format } from 'date-fns';
-const defaultDate = format(new Date(), 'YYYY-MM-DD');
+import { format, parse, differenceInCalendarDays, addDays } from 'date-fns';
+const isoFormat = 'YYYY-MM-DD';
+const defaultDate = format(new Date(), isoFormat);
+
 export default {
   name: 'v-date-range',
   props: {
@@ -107,6 +116,10 @@ export default {
     displayFormat: {
       type: String
     },
+    highlightColor: {
+      type: String,
+      default: 'blue lighten-5'
+    },
     /**
      * Icons
      */
@@ -135,7 +148,9 @@ export default {
     return {
       menu: false,
       pickerStart: this.value.start,
-      pickerEnd: this.value.end
+      pickerEnd: this.value.end,
+      highlightDates: [],
+      highlightClasses: {}
     };
   },
   computed: {
@@ -160,6 +175,12 @@ export default {
      */
     isValueEmpty() {
       return !this.value.start;
+    },
+    /**
+     * If the user has selected both the dates or not
+     */
+    bothSelected() {
+      return this.pickerStart && this.pickerEnd;
     }
   },
   methods: {
@@ -186,10 +207,36 @@ export default {
       // Reset the changed values for datepicker models.
       this.pickerStart = this.value.start;
       this.pickerEnd = this.value.end;
+      this.highlightDates = [];
+      this.highlightClasses = {};
       this.$emit('menu-closed');
     },
     formatDate(date, fmt) {
-      return format(new Date(date), fmt);
+      return format(parse(date), fmt);
+    },
+    highlight() {
+      if (!this.bothSelected) {
+        return;
+      }
+      const dates = [];
+      const classes = {};
+      const start = parse(this.pickerStart);
+      const end = parse(this.pickerEnd);
+      const diff = Math.abs(differenceInCalendarDays(start, end));
+
+      // Loop though all the days in range.
+      for (let i = 0; i <= diff; i++) {
+        const date = format(addDays(start, i), isoFormat);
+        dates.push(date);
+        const classesArr = [];
+        classesArr.push(`v-date-range__in-range`);
+        classesArr.push(this.highlightColor);
+        i === 0 && classesArr.push(`v-date-range__range-start`);
+        i === diff && classesArr.push(`v-date-range__range-end`);
+        classes[date] = classesArr.join(' ');
+      }
+      this.highlightDates = dates;
+      this.highlightClasses = classes;
     }
   },
   watch: {
@@ -197,13 +244,65 @@ export default {
     menu(isOpen) {
       if (!isOpen) {
         this.onMenuClose();
+      } else {
+        this.highlight();
       }
-    }
+    },
+    pickerStart: 'highlight',
+    pickerEnd: 'highlight'
   }
 };
 </script>
-<style scoped>
+<style scoped lang="stylus">
 .v-date-range__input-field >>> input {
   text-align: center;
+}
+
+.v-date-range__pickers >>> .v-date-picker-table__events {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  z-index: -1;
+}
+
+.v-date-range__pickers >>> .v-date-range__in-range {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+
+  &.v-date-range__range-start, &.v-date-range__range-end {
+    // display: none;
+  }
+
+  &:not(.v-date-range__range-start), &:not(.v-date-range__range-end) {
+    border-radius: 0;
+  }
+}
+
+.v-date-range__pickers >>> .v-date-picker-table table {
+  width: auto;
+  margin: auto;
+  border-collapse: collapse;
+
+  & th, & td {
+    height: 36px;
+    width: 36px;
+  }
+
+  & td {
+    .v-btn {
+      height: 36px;
+      width: 36px;
+      border-radius: 0;
+
+      &.v-btn--active::before {
+        background-color: transparent !important;
+      }
+    }
+  }
+}
+
+.v-date-range__picker >>> .v-picker__body {
+  width: auto !important;
 }
 </style>

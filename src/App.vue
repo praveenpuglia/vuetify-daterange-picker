@@ -10,7 +10,7 @@
             :input-props="inputProps"
             :menu-props="menuProps"
           >
-            <h1 slot="title">klasdf</h1>
+            <h3 slot="title">Vuetify Dater Range Picker - Next</h3>
           </v-date-range>
         </v-container>
       </v-content>
@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       range: {},
-      inputProps: { box: true, style: { width: '240px' } },
+      inputProps: { solo: true, style: { width: '240px' } },
       menuProps: { offsetY: true, closeOnContentClick: false }
     };
   }
