@@ -17,7 +17,13 @@
       ></v-text-field>
       <v-card class="v-date-range__menu-content">
         <v-card-text>
-          <div class="v-date-range__pickers">
+          <div
+            :data-days="highlightDates.length"
+            :class="{
+              'v-date-range__pickers': true,
+              'v-date-range--highlighted': highlightDates.length
+            }"
+          >
             <v-card-title v-if="$slots.title">
               <slot name="title" v-if="$slots.title"></slot>
             </v-card-title>
@@ -211,8 +217,7 @@ export default {
       // Reset the changed values for datepicker models.
       this.pickerStart = this.value.start;
       this.pickerEnd = this.value.end;
-      this.highlightDates = [];
-      this.highlightClasses = {};
+      this.highlight();
       this.$emit('menu-closed');
     },
     formatDate(date, fmt) {
@@ -269,6 +274,59 @@ export default {
   z-index: -1;
 }
 
+/* =============================================
+=            Date buttons            =
+============================================= */
+.v-date-range__pickers.v-date-range--highlighted {
+  >>> .v-date-range__picker {
+    &.v-date-range__picker--start .v-btn--active {
+      border-radius: 50% 0 0 50%;
+    }
+
+    &.v-date-range__picker--end .v-btn--active {
+      border-radius: 0 50% 50% 0;
+    }
+
+    &.v-date-range__picker--end.v-date-range__picker--start .v-btn--active {
+      border-radius: 50%;
+    }
+  }
+
+  &[data-days=1] >>> .v-date-picker__picker {
+    & .v-btn--active {
+      border-radius: 50%;
+    }
+  }
+}
+
+.v-date-range__pickers >>> .v-date-picker-table table {
+  width: auto;
+  margin: auto;
+  border-collapse: collapse;
+
+  & th, & td {
+    height: 32px;
+    width: 32px;
+  }
+
+  & td {
+    .v-btn {
+      &.v-btn--outline {
+        border: none;
+        box-shadow: 0 0 0 1px currentColor inset;
+      }
+
+      &.v-btn--active::before {
+        background-color: transparent !important;
+      }
+    }
+  }
+}
+
+/* =====  End of Date buttons  ====== */
+/* =============================================
+=            Highlighting the even bubble dot            =
+============================================= */
 .v-date-range__pickers >>> .v-date-range__in-range {
   height: 100%;
   width: 100%;
@@ -291,33 +349,7 @@ export default {
   }
 }
 
-.v-date-range__pickers >>> .v-date-picker-table table {
-  width: auto;
-  margin: auto;
-  border-collapse: collapse;
-
-  & th, & td {
-    height: 36px;
-    width: 36px;
-  }
-
-  & td {
-    .v-btn {
-      height: 36px;
-      width: 36px;
-
-      &.v-btn--outline {
-        border: none;
-        box-shadow: 0 0 0 1px currentColor inset;
-      }
-
-      &.v-btn--active::before {
-        background-color: transparent !important;
-      }
-    }
-  }
-}
-
+/* =====  End of Highlighting the even bubble dot  ====== */
 .v-date-range__picker >>> .v-picker__body {
   width: auto !important;
 }
