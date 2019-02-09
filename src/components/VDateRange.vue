@@ -6,15 +6,15 @@
       offset-y
       v-bind="menuProps"
     >
-      <div slot="activator" class="v-date-range__input">
-        <v-text-field
-          class="v-date-range__input-field"
-          :value="inputValue"
-          readonly
-          :placeholder="placeholder"
-          v-bind="inputProps"
-        ></v-text-field>
-      </div>
+      <v-text-field
+        slot="activator"
+        class="v-date-range__input-field"
+        :value="inputValue"
+        readonly
+        :disabled="disabled"
+        :placeholder="placeholder"
+        v-bind="inputProps"
+      ></v-text-field>
       <v-card class="v-date-range__menu-content">
         <v-card-text>
           <div class="v-date-range__pickers">
@@ -74,6 +74,10 @@ export default {
       default: () => {
         return { start: defaultDate, end: defaultDate };
       }
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     },
     // Denotes the Placeholder string for start date.
     startLabel: {
@@ -270,12 +274,20 @@ export default {
   width: 100%;
   margin: 0;
 
-  &.v-date-range__range-start, &.v-date-range__range-end {
-    // display: none;
-  }
-
   &:not(.v-date-range__range-start), &:not(.v-date-range__range-end) {
     border-radius: 0;
+  }
+
+  &.v-date-range__range-start {
+    border-radius: 50% 0 0 50%;
+  }
+
+  &.v-date-range__range-end {
+    border-radius: 0 50% 50% 0;
+  }
+
+  &.v-date-range__range-start.v-date-range__range-end {
+    border-radius: 50%;
   }
 }
 
@@ -293,7 +305,11 @@ export default {
     .v-btn {
       height: 36px;
       width: 36px;
-      border-radius: 0;
+
+      &.v-btn--outline {
+        border: none;
+        box-shadow: 0 0 0 1px currentColor inset;
+      }
 
       &.v-btn--active::before {
         background-color: transparent !important;
