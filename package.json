@@ -1,19 +1,19 @@
 {
   "name": "vuetify-daterange-picker",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": {
     "email": "praveenpuglia@gmail.com",
     "name": "Praveen Puglia",
     "url": "https://praveenpuglia.com"
   },
-  "main": "./dist/vuetify-date-range.common.js",
+  "main": "./dist/vuetify-daterange-picker.common.js",
   "repository": "https://github.com/praveenpuglia/vuetify-daterange-picker",
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build:lib": "vue-cli-service build --target lib --name vuetify-date-range ./src/components/index.js",
+    "build:lib": "vue-cli-service build --target lib --name vuetify-daterange-picker ./src/components/index.js",
     "test:unit": "vue-cli-service test:unit",
     "prepublish": "yarn build:lib"
   },
