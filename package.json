@@ -1,6 +1,6 @@
 {
   "name": "vuetify-daterange-picker",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "main": "./dist/vuetify-date-range.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
