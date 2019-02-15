@@ -350,7 +350,4 @@ export default {
 }
 
 /* =====  End of Highlighting the even bubble dot  ====== */
-.v-date-range__picker >>> .v-picker__body {
-  width: auto !important;
-}
 </style>
