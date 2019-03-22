@@ -87,7 +87,7 @@ const isoFormat = 'YYYY-MM-DD';
 const defaultDate = format(new Date(), isoFormat);
 
 export default {
-  name: 'v-date-range',
+  name: 'v-daterange',
   props: {
     // Take start and end as the input. Passable via v-model.
     value: {
