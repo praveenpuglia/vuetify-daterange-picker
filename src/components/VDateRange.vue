@@ -28,30 +28,45 @@
               <slot name="title" v-if="$slots.title"></slot>
             </v-card-title>
             <v-card-text>
-              <v-date-picker
-                class="mr-4 v-date-range__picker--start v-date-range__picker"
-                v-model="pickerStart"
-                :locale="locale"
-                :min="min"
-                :max="pickerEnd"
-                :no-title="noTitle"
-                :next-icon="nextIcon"
-                :prev-icon="prevIcon"
-                :events="highlightDates"
-                :event-color="highlightClasses"
-              ></v-date-picker>
-              <v-date-picker
-                class="v-date-range__picker--end v-date-range__picker"
-                v-model="pickerEnd"
-                :locale="locale"
-                :min="pickerStart"
-                :max="max"
-                :no-title="noTitle"
-                :next-icon="nextIcon"
-                :prev-icon="prevIcon"
-                :events="highlightDates"
-                :event-color="highlightClasses"
-              ></v-date-picker>
+              <div class="v-date-range__content">
+                <v-list v-if="!noPresets" class="mr-4">
+                  <v-subheader>{{ presetLabel }}</v-subheader>
+                  <v-list-tile
+                    v-for="(preset, index) in presets"
+                    v-model="isPresetActive[index]"
+                    :key="index"
+                    @click="selectPreset(index)"
+                  >
+                    <v-list-tile-content>
+                      {{ preset.label }}
+                    </v-list-tile-content>
+                  </v-list-tile>
+                </v-list>
+                <v-date-picker
+                  class="mr-4 v-date-range__picker--start v-date-range__picker"
+                  v-model="pickerStart"
+                  :locale="locale"
+                  :min="min"
+                  :max="pickerEnd"
+                  :no-title="noTitle"
+                  :next-icon="nextIcon"
+                  :prev-icon="prevIcon"
+                  :events="highlightDates"
+                  :event-color="highlightClasses"
+                ></v-date-picker>
+                <v-date-picker
+                  class="v-date-range__picker--end v-date-range__picker"
+                  v-model="pickerEnd"
+                  :locale="locale"
+                  :min="pickerStart"
+                  :max="max"
+                  :no-title="noTitle"
+                  :next-icon="nextIcon"
+                  :prev-icon="prevIcon"
+                  :events="highlightDates"
+                  :event-color="highlightClasses"
+                ></v-date-picker>
+              </div>
             </v-card-text>
           </div>
         </v-card-text>
@@ -85,6 +100,16 @@ export default {
       type: Boolean,
       default: false
     },
+    presets: {
+      type: Array,
+      default: () => {
+        return [];
+      }
+    },
+    noPresets: {
+      type: Boolean,
+      default: false
+    },
     // Denotes the Placeholder string for start date.
     startLabel: {
       type: String,
@@ -99,6 +124,10 @@ export default {
     separatorLabel: {
       type: String,
       default: 'To'
+    },
+    presetLabel: {
+      type: String,
+      default: 'Presets'
     },
     /**
      * Following values are all passable to vuetify's own datepicker
@@ -191,6 +220,13 @@ export default {
      */
     bothSelected() {
       return this.pickerStart && this.pickerEnd;
+    },
+    isPresetActive() {
+      return this.presets.map(
+        preset =>
+          preset.range[0] === this.pickerStart &&
+          preset.range[1] === this.pickerEnd
+      );
     }
   },
   methods: {
@@ -213,7 +249,7 @@ export default {
      * Upon closing the datepicker values are set
      * to the current selected value.
      */
-    onMenuClose() {
+    closeMenu() {
       // Reset the changed values for datepicker models.
       this.pickerStart = this.value.start;
       this.pickerEnd = this.value.end;
@@ -246,13 +282,17 @@ export default {
       }
       this.highlightDates = dates;
       this.highlightClasses = classes;
+    },
+    selectPreset(presetIndex) {
+      this.pickerStart = this.presets[presetIndex].range[0];
+      this.pickerEnd = this.presets[presetIndex].range[1];
     }
   },
   watch: {
     // Watching to see if the menu is closed.
     menu(isOpen) {
       if (!isOpen) {
-        this.onMenuClose();
+        this.closeMenu();
       } else {
         this.highlight();
       }
@@ -267,6 +307,20 @@ export default {
   text-align: center;
 }
 
+/* =============================================
+=            Menu Content            =
+============================================= */
+.v-date-range__content {
+  display: flex;
+
+  >>> .v-date-picker-table {
+    .v-btn {
+      border-radius: 0;
+    }
+  }
+}
+
+/* =====  End of Menu Content  ====== */
 .v-date-range__pickers >>> .v-date-picker-table__events {
   height: 100%;
   width: 100%;
@@ -277,28 +331,6 @@ export default {
 /* =============================================
 =            Date buttons            =
 ============================================= */
-.v-date-range__pickers.v-date-range--highlighted {
-  >>> .v-date-range__picker {
-    &.v-date-range__picker--start .v-btn--active {
-      border-radius: 50% 0 0 50%;
-    }
-
-    &.v-date-range__picker--end .v-btn--active {
-      border-radius: 0 50% 50% 0;
-    }
-
-    &.v-date-range__picker--end.v-date-range__picker--start .v-btn--active {
-      border-radius: 50%;
-    }
-  }
-
-  &[data-days=1] >>> .v-date-picker__picker {
-    & .v-btn--active {
-      border-radius: 50%;
-    }
-  }
-}
-
 .v-date-range__pickers >>> .v-date-picker-table table {
   width: auto;
   margin: auto;
@@ -331,22 +363,7 @@ export default {
   height: 100%;
   width: 100%;
   margin: 0;
-
-  &:not(.v-date-range__range-start), &:not(.v-date-range__range-end) {
-    border-radius: 0;
-  }
-
-  &.v-date-range__range-start {
-    border-radius: 50% 0 0 50%;
-  }
-
-  &.v-date-range__range-end {
-    border-radius: 0 50% 50% 0;
-  }
-
-  &.v-date-range__range-start.v-date-range__range-end {
-    border-radius: 50%;
-  }
+  border-radius: 0;
 }
 
 /* =====  End of Highlighting the even bubble dot  ====== */
