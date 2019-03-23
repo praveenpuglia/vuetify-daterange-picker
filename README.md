@@ -1,43 +1,11 @@
-# vuetify-daterange-picker
+# Vuetify Daterange Picker
 
-Docs are work in progress here - https://vuetify-daterange-picker.gitbook.io/docs.
+The missing date range picker for Vuetify JS you have been looking for
 
-## Project setup
+## Installation, Usage & API
 
-```
-yarn install
-```
+https://vuetify-daterange-picker.gitbook.io/docs
 
-### Compiles and hot-reloads for development
+---
 
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-
-```
-yarn run build
-```
-
-### Run your tests
-
-```
-yarn run test
-```
-
-### Lints and fixes files
-
-```
-yarn run lint
-```
-
-### Run your unit tests
-
-```
-yarn run test:unit
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
+If you liked the component, please consider giving it a ⭐️.
