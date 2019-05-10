@@ -72,6 +72,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
+          <v-btn flat @click="reset">Reset</v-btn>
           <v-btn flat @click="menu = false">Cancel</v-btn>
           <v-btn @click="applyRange" color="primary" :disabled="!bothSelected"
             >Apply</v-btn
@@ -159,6 +160,10 @@ export default {
       type: String,
       default: 'blue lighten-5'
     },
+    showReset: {
+      type: Boolean,
+      default: true
+    },
     /**
      * Icons
      */
@@ -235,11 +240,8 @@ export default {
      * This makes v-model work.
      */
     applyRange() {
-      this.$emit('input', {
-        start: this.pickerStart,
-        end: this.pickerEnd
-      });
       this.menu = false;
+      this.emitRange();
     },
     /**
      * Called every time the menu is closed.
@@ -286,6 +288,20 @@ export default {
     selectPreset(presetIndex) {
       this.pickerStart = this.presets[presetIndex].range[0];
       this.pickerEnd = this.presets[presetIndex].range[1];
+    },
+    reset() {
+      // Reset Picker Values
+      this.pickerStart = '';
+      this.pickerEnd = '';
+      this.highlightDates = [];
+      this.highlightClasses = {};
+      this.emitRange();
+    },
+    emitRange() {
+      this.$emit('input', {
+        start: this.pickerStart,
+        end: this.pickerEnd
+      });
     }
   },
   watch: {

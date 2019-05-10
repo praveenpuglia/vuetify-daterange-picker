@@ -3,6 +3,7 @@
     <v-app>
       <v-content>
         <v-container>
+          {{ range }}
           <v-daterange
             v-model="range"
             display-format="DD-MM-YYYY"
