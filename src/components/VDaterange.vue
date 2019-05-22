@@ -46,6 +46,7 @@
                   class="mr-4 v-date-range__picker--start v-date-range__picker"
                   v-model="pickerStart"
                   :locale="locale"
+                  :first-day-of-week="firstDayOfWeek"
                   :min="min"
                   :max="pickerEnd || max"
                   :no-title="noTitle"
@@ -58,6 +59,7 @@
                   class="v-date-range__picker--end v-date-range__picker"
                   v-model="pickerEnd"
                   :locale="locale"
+                  :first-day-of-week="firstDayOfWeek"
                   :min="pickerStart || min"
                   :max="max"
                   :no-title="noTitle"
@@ -148,6 +150,10 @@ export default {
     locale: {
       type: String,
       default: 'en-us'
+    },
+    firstDayOfWeek: {
+      type: [String, Number],
+      default: 0
     },
     noTitle: {
       type: Boolean,
