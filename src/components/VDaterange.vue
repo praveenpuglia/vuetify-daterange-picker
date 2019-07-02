@@ -132,6 +132,19 @@ export default {
       type: String,
       default: 'Presets'
     },
+    // Button labels
+    buttonCancelLabel: {
+      type: String,
+      default: 'Cancel'
+    },
+    buttonApplyLabel: {
+      type: String,
+      default: 'Apply'
+    },
+    buttonResetLabel: {
+      type: String,
+      default: 'Reset'
+    },
     /**
      * Following values are all passable to vuetify's own datepicker
      * component.
