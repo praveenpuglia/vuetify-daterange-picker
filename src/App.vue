@@ -6,7 +6,7 @@
           {{ range }}
           <v-daterange
             v-model="range"
-            display-format="DD-MM-YYYY"
+            display-format="dd-MM-yyyy"
             no-title
             :input-props="inputProps"
             :menu-props="menuProps"
@@ -21,6 +21,7 @@
 </template>
 <script>
 import VDaterange from '@/components/VDaterange';
+import isoFormat from './utils/date';
 import { format, subDays } from 'date-fns';
 export default {
   name: 'app',
@@ -33,23 +34,20 @@ export default {
       presets: [
         {
           label: 'Today',
-          range: [
-            format(new Date(), 'YYYY-MM-DD'),
-            format(new Date(), 'YYYY-MM-DD')
-          ]
+          range: [format(new Date(), isoFormat), format(new Date(), isoFormat)]
         },
         {
           label: 'Yesterday',
           range: [
-            format(subDays(new Date(), 1), 'YYYY-MM-DD'),
-            format(subDays(new Date(), 1), 'YYYY-MM-DD')
+            format(subDays(new Date(), 1), isoFormat),
+            format(subDays(new Date(), 1), isoFormat)
           ]
         },
         {
           label: 'Last 30 Days',
           range: [
-            format(subDays(new Date(), 30), 'YYYY-MM-DD'),
-            format(subDays(new Date(), 1), 'YYYY-MM-DD')
+            format(subDays(new Date(), 30), isoFormat),
+            format(subDays(new Date(), 1), isoFormat)
           ]
         }
       ]

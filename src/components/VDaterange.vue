@@ -86,7 +86,7 @@
 </template>
 <script>
 import { format, parse, differenceInCalendarDays, addDays } from 'date-fns';
-const isoFormat = 'YYYY-MM-DD';
+import isoFormat from '../utils/date';
 const defaultDate = format(new Date(), isoFormat);
 
 export default {
