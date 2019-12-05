@@ -11,6 +11,7 @@
             :input-props="inputProps"
             :menu-props="menuProps"
             :presets="presets"
+            :action-labels="{ apply: 'Custom Apply' }"
           >
             <h3 slot="title">Vuetify Dater Range Picker - Next</h3>
           </v-daterange>

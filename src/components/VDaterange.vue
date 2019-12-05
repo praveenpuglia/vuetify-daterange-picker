@@ -74,10 +74,15 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat @click="reset">Reset</v-btn>
-          <v-btn flat @click="menu = false">Cancel</v-btn>
-          <v-btn @click="applyRange" color="primary" :disabled="!bothSelected"
-            >Apply</v-btn
+          <v-btn flat @click="reset">{{ mergedActionLabels.reset }}</v-btn>
+          <v-btn flat @click="menu = false">{{
+            mergedActionLabels.cancel
+          }}</v-btn>
+          <v-btn
+            @click="applyRange"
+            color="primary"
+            :disabled="!bothSelected"
+            >{{ mergedActionLabels.apply }}</v-btn
           >
         </v-card-actions>
       </v-card>
@@ -86,9 +91,11 @@
 </template>
 <script>
 import { format, parse, differenceInCalendarDays, addDays } from 'date-fns';
-import { ISO_FORMAT } from '../utils/constants';
-const defaultDate = format(new Date(), ISO_FORMAT);
-
+import {
+  ISO_FORMAT,
+  DEFAULT_DATE,
+  DEFAULT_ACTION_LABELS
+} from '../utils/constants';
 export default {
   name: 'v-daterange',
   props: {
@@ -96,7 +103,7 @@ export default {
     value: {
       type: Object,
       default: () => {
-        return { start: defaultDate, end: defaultDate };
+        return { start: DEFAULT_DATE, end: DEFAULT_DATE };
       }
     },
     disabled: {
@@ -131,6 +138,12 @@ export default {
     presetLabel: {
       type: String,
       default: 'Presets'
+    },
+    actionLabels: {
+      type: Object,
+      default: () => {
+        return DEFAULT_ACTION_LABELS;
+      }
     },
     /**
      * Following values are all passable to vuetify's own datepicker
@@ -238,6 +251,9 @@ export default {
           preset.range[0] === this.pickerStart &&
           preset.range[1] === this.pickerEnd
       );
+    },
+    mergedActionLabels() {
+      return { ...DEFAULT_ACTION_LABELS, ...this.actionLabels };
     }
   },
   methods: {
