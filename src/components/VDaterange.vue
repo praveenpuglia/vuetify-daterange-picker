@@ -86,8 +86,8 @@
 </template>
 <script>
 import { format, parse, differenceInCalendarDays, addDays } from 'date-fns';
-const isoFormat = 'YYYY-MM-DD';
-const defaultDate = format(new Date(), isoFormat);
+import { ISO_FORMAT } from '../utils/constants';
+const defaultDate = format(new Date(), ISO_FORMAT);
 
 export default {
   name: 'v-daterange',
@@ -265,7 +265,7 @@ export default {
       this.$emit('menu-closed');
     },
     formatDate(date, fmt) {
-      return format(parse(date), fmt);
+      return format(parse(date, ISO_FORMAT, new Date()), fmt);
     },
     highlight() {
       if (!this.bothSelected) {
@@ -273,13 +273,13 @@ export default {
       }
       const dates = [];
       const classes = {};
-      const start = parse(this.pickerStart);
-      const end = parse(this.pickerEnd);
+      const start = parse(this.pickerStart, ISO_FORMAT, new Date());
+      const end = parse(this.pickerEnd, ISO_FORMAT, new Date());
       const diff = Math.abs(differenceInCalendarDays(start, end));
 
       // Loop though all the days in range.
       for (let i = 0; i <= diff; i++) {
-        const date = format(addDays(start, i), isoFormat);
+        const date = format(addDays(start, i), ISO_FORMAT);
         dates.push(date);
         const classesArr = [];
         classesArr.push(`v-date-range__in-range`);
