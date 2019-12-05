@@ -21,7 +21,7 @@
 </template>
 <script>
 import VDaterange from '@/components/VDaterange';
-import isoFormat from './utils/date';
+import { ISO_FORMAT } from './utils/constants';
 import { format, subDays } from 'date-fns';
 export default {
   name: 'app',
@@ -34,20 +34,23 @@ export default {
       presets: [
         {
           label: 'Today',
-          range: [format(new Date(), isoFormat), format(new Date(), isoFormat)]
+          range: [
+            format(new Date(), ISO_FORMAT),
+            format(new Date(), ISO_FORMAT)
+          ]
         },
         {
           label: 'Yesterday',
           range: [
-            format(subDays(new Date(), 1), isoFormat),
-            format(subDays(new Date(), 1), isoFormat)
+            format(subDays(new Date(), 1), ISO_FORMAT),
+            format(subDays(new Date(), 1), ISO_FORMAT)
           ]
         },
         {
           label: 'Last 30 Days',
           range: [
-            format(subDays(new Date(), 30), isoFormat),
-            format(subDays(new Date(), 1), isoFormat)
+            format(subDays(new Date(), 30), ISO_FORMAT),
+            format(subDays(new Date(), 1), ISO_FORMAT)
           ]
         }
       ]
