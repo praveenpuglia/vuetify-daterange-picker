@@ -90,6 +90,7 @@
   </div>
 </template>
 <script>
+// this is description of main component
 import { format, parse, differenceInCalendarDays, addDays } from 'date-fns';
 import {
   ISO_FORMAT,
